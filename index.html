@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kbez MC Shop - Enhanced Edition</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/png" href="images.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@500;700;900&family=Cinzel:wght@600;800&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyberCyan: '#00f0ff',
+                        cyberPink: '#ff007f',
+                        mcEmerald: '#388e3c',
+                        mcEmeraldBright: '#55ff55',
+                        mcGold: '#ffaa00',
+                        luxGold: '#d4af37',
+                    },
+                    fontFamily: {
+                        pixel: ['"Press Start 2P"', 'monospace'],
+                        arcade: ['"VT323"', 'monospace'],
+                        cyber: ['"Orbitron"', 'sans-serif'],
+                        luxury: ['"Cinzel"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base Transitions */
+        * {
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        /* Theme selector: always make the active theme obvious */
+        .theme-switcher-tab.is-active {
+            background: #047857 !important;
+            color: #ffffff !important;
+            border: 1px solid #34d399;
+            box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.22), 0 4px 14px rgba(16, 185, 129, 0.25);
+        }
+        .theme-switcher-tab .theme-current-label {
+            display: none;
+        }
+        .theme-switcher-tab.is-active .theme-current-label {
+            display: inline-flex;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+
+        /* -------------------------------------------------------------
+           THEME 1: MODERN GAMING DARK (Default)
+        ------------------------------------------------------------- */
+        .theme-modern {
+            --bg-main: #0b0f19;
+            --bg-card: rgba(17, 24, 39, 0.75);
+            --border-card: rgba(59, 130, 246, 0.2);
+            --accent-primary: #10b981;
+            --accent-secondary: #f59e0b;
+        }
+        .theme-modern body {
+            background-color: var(--bg-main);
+            background-image: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+                              radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+        }
+        .theme-modern .app-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        .theme-modern .app-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-4px);
+        }
+        .theme-modern .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            font-weight: 700;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+        .theme-modern .btn-primary:hover {
+            filter: brightness(1.1);
+        }
+
+        /* -------------------------------------------------------------
+           THEME 2: MINECRAFT PIXEL CRAFT
+        ------------------------------------------------------------- */
+        .theme-pixel {
+            --bg-main: #1a1a1a;
+            --bg-card: #3b3b3b;
+            --border-card: #7a7a7a;
+            --accent-primary: #55ff55;
+            --accent-secondary: #ffff55;
+        }
+        .theme-pixel body {
+            background-color: #1a1a1a;
+            background-image:
+                linear-gradient(45deg, #2d2d2d 25%, transparent 25%),
+                linear-gradient(-45deg, #2d2d2d 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #2d2d2d 75%),
+                linear-gradient(-45deg, transparent 75%, #2d2d2d 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+            color: #e0e0e0;
+            font-family: 'VT323', monospace;
+            font-size: 1.15rem;
+            image-rendering: pixelated;
+        }
+        .theme-pixel #themeBanner {
+            background: #2a2a2a;
+            border-color: #4a4a4a;
+            color: #c6f0b0;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+        }
+        .theme-pixel nav {
+            background: #2a2a2a !important;
+            border-color: #4a4a4a !important;
+        }
+        /* Unlike the other themes, keep product navigation visible in Pixel mode,
+           including when the preview is narrowed to a mobile-sized frame. */
+        .theme-pixel #navLinksContainer {
+            display: flex !important;
+            width: 100%;
+            max-width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+        .theme-pixel .theme-switcher-tab.is-active {
+            background: #55ff55 !important;
+            color: #101010 !important;
+            border: 3px solid #aaffaa !important;
+            border-bottom-color: #246b24 !important;
+            border-right-color: #246b24 !important;
+            box-shadow: 0 0 14px #55ff5570;
+        }
+        .theme-pixel .theme-switcher-tab.is-active .theme-current-label {
+            background: #163d16;
+            color: #ffffff;
+        }
+        .theme-pixel .nav-btn,
+        .theme-pixel .theme-switcher-tab {
+            border-radius: 0 !important;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            text-transform: uppercase;
+        }
+        .theme-pixel .nav-btn:not(.btn-primary) {
+            background: #6b6b6b;
+            border: 3px solid #9a9a9a;
+            border-bottom-color: #2a2a2a;
+            border-right-color: #2a2a2a;
+            color: #f0f0f0;
+            min-height: 36px;
+            padding: 8px 10px;
+        }
+        .theme-pixel .nav-btn.btn-primary {
+            background: #55ff55 !important;
+            color: #101010 !important;
+            border: 3px solid #aaffaa;
+            border-bottom-color: #246b24;
+            border-right-color: #246b24;
+            box-shadow: 0 0 12px #55ff5560;
+        }
+        .theme-pixel .app-header-title {
+            font-family: 'Press Start 2P', monospace !important;
+            letter-spacing: -1px;
+            text-shadow: 3px 3px 0 #000;
+        }
+        .theme-pixel .app-header-title {
+            font-family: 'Press Start 2P', monospace !important;
+            letter-spacing: -1px;
+            text-shadow: 3px 3px 0px #000;
+        }
+        .theme-pixel .app-card {
+            background: #1a1b24;
+            border: 4px solid #7a7a7a;
+            border-bottom: 6px solid #1a1a1a;
+            border-right: 6px solid #1a1a1a;
+            border-radius: 0 !important;
+            box-shadow: inset 0 0 0 2px #5a5a5a, 0 8px 0 #0a0a0a;
+        }
+        .theme-pixel .app-card:hover {
+            border-color: #ffff55;
+            box-shadow: inset 0 0 0 2px #5a5a5a, 0 12px 0 #0a0a0a, 0 0 20px #ffff5560;
+        }
+        .theme-pixel .app-card h2,
+        .theme-pixel .app-card h3 { color: #ffff55; text-shadow: 2px 2px 0 #3f3f00; }
+        .theme-pixel .app-card img { image-rendering: pixelated; }
+        .theme-pixel .btn-primary {
+            background: #6b6b6b;
+            border: 3px solid #9a9a9a;
+            border-bottom: 4px solid #2a2a2a;
+            border-right: 4px solid #2a2a2a;
+            box-shadow: 
+                inset 0 0 0 2px #5a5a5a;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            border-radius: 0px !important;
+            text-shadow: 2px 2px #000;
+            color: #f0f0f0;
+        }
+        .theme-pixel .btn-primary:hover {
+            background: #55ff55;
+            color: #000;
+            border-color: #aaffaa;
+            transform: translateY(-2px);
+            box-shadow: 0 0 18px #55ff55;
+        }
+        .theme-pixel .app-card .text-mcGold,
+        .theme-pixel .app-card .text-emerald-400 { color: #55ff55 !important; }
+        .theme-pixel input { border-radius: 0 !important; }
+
+        /* -------------------------------------------------------------
+           THEME 3: CYBERPUNK NEON GLOW
+        ------------------------------------------------------------- */
+        .theme-cyber {
+            --bg-main: #05050a;
+            --bg-card: rgba(10, 10, 20, 0.9);
+            --border-card: #00f0ff;
+            --accent-primary: #00f0ff;
+            --accent-secondary: #ff007f;
+        }
+        .theme-cyber body {
+            background-color: #05050a;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        .theme-cyber .app-header-title {
+            font-family: 'Orbitron', sans-serif !important;
+            letter-spacing: 2px;
+            color: #00f0ff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+        .theme-cyber .app-card {
+            background: rgba(10, 12, 24, 0.85);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 0.25rem;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15), inset 0 0 15px rgba(0, 240, 255, 0.05);
+            position: relative;
+        }
+        .theme-cyber .app-card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; width: 10px; height: 10px;
+            border-top: 2px solid #ff007f;
+            border-left: 2px solid #ff007f;
+        }
+        .theme-cyber .app-card:hover {
+            border-color: #ff007f;
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.4);
+        }
+        .theme-cyber .btn-primary {
+            background: linear-gradient(90deg, #00f0ff 0%, #ff007f 100%);
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+        .theme-cyber .btn-primary:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+            transform: scale(1.02);
+        }
+
+        /* -------------------------------------------------------------
+           THEME 4: MINIMALIST CLEAN LUXURY
+        ------------------------------------------------------------- */
+        .theme-luxury {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --border-card: #d4af37;
+            --accent-primary: #d4af37;
+            --accent-secondary: #f8fafc;
+        }
+        .theme-luxury body {
+            background-color: #0f172a;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+        }
+        .theme-luxury .app-header-title {
+            font-family: 'Cinzel', serif !important;
+            letter-spacing: 3px;
+            color: #d4af37;
+            font-weight: 700;
+        }
+        .theme-luxury .app-card {
+            background: #1e293b;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        .theme-luxury .app-card:hover {
+            border-color: #d4af37;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
+        }
+        .theme-luxury .btn-primary {
+            background: transparent;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            border-radius: 0.375rem;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+        }
+        .theme-luxury .btn-primary:hover {
+            background: #d4af37;
+            color: #0f172a;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Mobile Frame Container */
+        .mobile-frame-container {
+            max-width: 420px !important;
+            margin: 0 auto;
+            border: 12px solid #1e293b;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(255,255,255,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        .mobile-frame-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 20px;
+            background: #1e293b;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 100;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up {
+            animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="theme-modern min-h-screen flex flex-col antialiased">
+
+    <!-- ================= TOP THEME CONTROL HUD BANNER ================= -->
+    <header class="bg-black/95 border-b border-gray-800 sticky top-0 z-50 px-4 py-3 shadow-2xl backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3 w-full md:w-auto justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <h1 class="font-bold text-white text-sm sm:text-base tracking-wide flex items-center gap-2">
+                        <i class="fas fa-layer-group text-mcGold"></i> KBEZ MC SHOP
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono hidden sm:inline-block"></span>
+                    </h1>
+                </div>
+
+                <div class="flex md:hidden items-center gap-2">
+                    <button onclick="toggleMobileView()" id="mobileViewBtnM" class="p-2 bg-gray-800 rounded text-xs text-gray-300 hover:text-white" title="Toggle Mobile Frame View">
+                        <i class="fas fa-mobile-alt"></i>
+                    </button>
+                    <button onclick="openCodeModal()" class="p-2 bg-gray-800 rounded text-xs text-mcGold" title="Inspect Theme Code">
+                        <i class="fas fa-code"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Theme Switcher Tabs -->
+            <div class="flex items-center gap-1 sm:gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
+                <button onclick="setTheme('modern')" id="tab-modern" class="theme-switcher-tab px-3 py-1.5 rounded-lg font-sans text-xs font-semibold bg-gray-800 text-gray-300 hover:text-white flex items-center gap-1.5 shrink-0">
+                    <i class="fas fa-sparkles"></i> 1. Modern Dark <span class="theme-current-label ml-1 px-1.5 py-0.5 rounded bg-black/25 text-[9px] tracking-wide">ACTIVE</span>
+                </button>
+                <button onclick="setTheme('pixel')" id="tab-pixel" class="theme-switcher-tab px-3 py-1.5 rounded-lg font-sans text-xs font-semibold bg-gray-800 text-gray-300 hover:text-white flex items-center gap-1.5 shrink-0">
+                    <i class="fas fa-cubes"></i> 2. Minecraft Pixel <span class="theme-current-label ml-1 px-1.5 py-0.5 rounded bg-black/25 text-[9px] tracking-wide">ACTIVE</span>
+                </button>
+                <button onclick="setTheme('cyber')" id="tab-cyber" class="theme-switcher-tab px-3 py-1.5 rounded-lg font-sans text-xs font-semibold bg-gray-800 text-gray-300 hover:text-white flex items-center gap-1.5 shrink-0">
+                    <i class="fas fa-bolt text-cyan-400"></i> 3. Cyber Neon <span class="theme-current-label ml-1 px-1.5 py-0.5 rounded bg-black/25 text-[9px] tracking-wide">ACTIVE</span>
+                </button>
+                <button onclick="setTheme('luxury')" id="tab-luxury" class="theme-switcher-tab px-3 py-1.5 rounded-lg font-sans text-xs font-semibold bg-gray-800 text-gray-300 hover:text-white flex items-center gap-1.5 shrink-0">
+                    <i class="fas fa-crown"></i> 4. Clean Luxury <span class="theme-current-label ml-1 px-1.5 py-0.5 rounded bg-black/25 text-[9px] tracking-wide">ACTIVE</span>
+                </button>
+            </div>
+
+            <div class="hidden md:flex items-center gap-3">
+                <button onclick="toggleMobileView()" id="mobileViewBtnD" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-sans text-gray-300 flex items-center gap-2 transition">
+                    <i class="fas fa-mobile-alt"></i> <span id="viewModeText">Mobile Frame</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN SHOWCASE FRAME WRAPPER ================= -->
+    <div id="appViewportFrame" class="flex-grow w-full flex flex-col transition-all duration-300">
+        
+        <div id="themeBanner" class="bg-black/80 border-b border-gray-800 py-2 px-4 text-xs font-sans tracking-wider text-center text-emerald-400 flex flex-wrap justify-center gap-6">
+            <span class="flex items-center gap-2"><i class="fas fa-bolt text-mcGold"></i> FLASH SALE ACTIVE: UP TO 40% OFF</span>
+            <span class="flex items-center gap-2"><i class="fas fa-shield-alt text-cyan-400"></i> 7-DAY GUARANTEE</span>
+            <span class="flex items-center gap-2"><i class="fas fa-users text-mcGold"></i> 3,420+ SATISFIED CUSTOMERS</span>
+        </div>
+
+        <nav class="bg-black/50 border-b border-white/10 px-4 sm:px-8 py-4 sticky top-14 z-40 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <div class="flex items-center justify-between w-full md:w-auto">
+                    <a href="#accounts" onclick="switchTab('accounts')" class="flex items-center gap-3 group">
+                        <div class="w-10 h-10 border-2 border-mcGold bg-emerald-500/20 flex items-center justify-center rounded-lg overflow-hidden shadow">
+                            <img src="images.png" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/40x40/388e3c/ffaa00?text=MC'">
+                        </div>
+                        <span class="app-header-title text-lg sm:text-xl font-bold tracking-tight text-white">KBEZ MC SHOP</span>
+                    </a>
+
+                    <div class="flex items-center gap-3 md:hidden">
+                        <button onclick="toggleAudio()" id="soundBtnMobile" class="p-2 bg-black/60 border border-white/20 text-mcGold text-xs rounded-lg" title="Toggle Sound SFX">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <button onclick="toggleCart()" class="relative p-2 bg-emerald-500/20 border border-emerald-500/40 text-mcGold rounded-lg">
+                            <i class="fas fa-shopping-cart text-lg"></i>
+                            <span id="mobileCartCount" class="absolute -top-2 -right-2 bg-mcGold text-black font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center border border-black">0</span>
+                        </button>
+                        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-white text-xl p-1">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative w-full md:w-72">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="globalSearch" oninput="handleSearch(this.value)" placeholder="Search accounts, capes, resource packs..." class="w-full pl-9 pr-4 py-2 bg-black/50 border border-white/15 rounded-xl text-sm text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 font-sans transition">
+                </div>
+
+                <div id="navLinksContainer" class="hidden md:flex items-center gap-1 flex-wrap justify-center font-sans text-xs font-semibold">
+                    <button onclick="switchTab('all')" data-tab="all" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">All</button>
+                    <button onclick="switchTab('accounts')" data-tab="accounts" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Accounts</button>
+                    <button onclick="switchTab('capes')" data-tab="capes" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Capes</button>
+                    <button onclick="switchTab('misc')" data-tab="misc" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Misc</button>
+                    <button onclick="switchTab('media')" data-tab="media" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Media</button>
+                    <button onclick="switchTab('contact')" data-tab="contact" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Support & FAQ</button>
+                    
+                    
+                </div>
+
+                <div class="hidden md:flex items-center gap-3">
+                    <button onclick="toggleAudio()" id="soundBtnDesktop" class="px-3 py-2 bg-black/60 border border-white/10 text-mcGold text-xs rounded-xl hover:bg-white/10 transition flex items-center gap-1.5" title="Toggle Sound SFX Engine">
+                        <i class="fas fa-volume-up text-emerald-400"></i>
+                        <span>SFX: ON</span>
+                    </button>
+                    <button onclick="toggleCart()" class="px-4 py-2 bg-mcGold hover:bg-yellow-500 text-black font-bold rounded-xl text-xs flex items-center gap-2 transition shadow-lg shadow-yellow-500/10">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>CART</span>
+                        <span id="desktopCartCount" class="bg-black text-mcGold px-2 py-0.5 rounded ml-1 text-[11px]">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-2 pt-4 pb-2 border-t border-white/10 mt-3 font-sans text-xs font-semibold">
+                <button onclick="switchTab('all'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">▦ All</button>
+                <button onclick="switchTab('accounts'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🗡️ Accounts</button>
+                <button onclick="switchTab('capes'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🚩 Capes</button>
+                <button onclick="switchTab('misc'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📦 Misc</button>
+                <button onclick="switchTab('media'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📱 Media</button>
+                <button onclick="switchTab('contact'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">💬 Support & FAQ</button>
+                
+
+            </div>
+        </nav>
+
+                <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-8 py-8 w-full">
+
+            <!-- ALL PRODUCTS VIEW -->
+            <section id="view-all" class="tab-view space-y-8">
+                <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
+                    <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">ALL PRODUCTS</h2>
+                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Browse everything in one place — accounts, capes, resource packs and maps.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="allGrid"></div>
+            </section>
+
+            <!-- ACCOUNTS VIEW -->
+            <section id="view-accounts" class="tab-view space-y-8 hidden">
+                <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
+                    <div class="absolute -top-12 -right-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                    <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">MINECRAFT ACCOUNTS</h2>
+                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Full Access Java & Bedrock accounts. Verified clean history, instant automated delivery.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="accountsGrid"></div>
+            </section>
+
+            <!-- CAPES VIEW -->
+            <section id="view-capes" class="tab-view space-y-8 hidden">
+                <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
+                    <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">MINECRAFT CAPES</h2>
+                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Official redeemable cape codes for Java & Bedrock. Syncs across all multiplayer servers.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="capesGrid"></div>
+            </section>
+
+            <!-- MISC VIEW -->
+            <section id="view-misc" class="tab-view space-y-8 hidden">
+                <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
+                    <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">RESOURCE PACKS & MAPS</h2>
+                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">High performance PvP texture packs and practice maps ready for immediate download.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="miscGrid"></div>
+            </section>
+
+            <!-- SUPPORT & FAQ VIEW -->
+            <section id="view-contact" class="tab-view space-y-10 hidden">
+                <div class="app-card px-6 py-10 sm:py-12 text-center relative overflow-hidden">
+                    <h2 class="app-header-title text-3xl sm:text-4xl font-bold mb-3 text-mcGold">Contact Us</h2>
+                    <p class="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto">We're here to help 24/7! Choose your preferred way to reach us.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto">
+                    <div class="app-card p-6 sm:p-7 text-center space-y-3">
+                        <div class="text-4xl sm:text-5xl text-mcGold"><i class="fab fa-telegram"></i></div>
+                        <h3 class="app-header-title text-lg font-bold text-white">Telegram</h3>
+                        <div class="text-mcGold font-semibold">@sokb07</div>
+                        <p class="text-gray-300 text-xs">⏱ Response time: 2-10 minutes, or just leave a message for us.</p>
+                        <a href="https://t.me/sokb07" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2">
+                            <i class="fab fa-telegram"></i> Message on Telegram
+                        </a>
+                    </div>
+
+                    <div class="app-card p-6 sm:p-7 text-center space-y-3">
+                        <div class="text-4xl sm:text-5xl text-mcGold"><i class="fab fa-discord"></i></div>
+                        <h3 class="app-header-title text-lg font-bold text-white">Discord</h3>
+                        <div class="text-mcGold font-semibold">MC Shop Support</div>
+                        <p class="text-gray-300 text-xs">⏱ Response time: 5-20 minutes</p>
+                        <a href="https://discord.gg/7PB3Vz5nng" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2">
+                            <i class="fab fa-discord"></i> Join Discord
+                        </a>
+                    </div>
+                </div>
+
+                <div class="max-w-2xl mx-auto space-y-3">
+                    <h3 class="app-header-title text-xl sm:text-2xl font-bold text-mcGold text-center mb-5">Frequently Asked Questions</h3>
+
+                    <details class="app-card p-4 sm:p-5 rounded-xl">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                            <span><span class="text-pink-400 mr-2">?</span>How long does delivery take?</span>
+                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                        </summary>
+                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Delivery takes 5-15 minutes after payment verification. You'll receive the account details via Telegram.</p>
+                    </details>
+
+                    <details class="app-card p-4 sm:p-5 rounded-xl">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                            <span><span class="text-pink-400 mr-2">?</span>How can I redeem the codes/cape?</span>
+                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                        </summary>
+                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Login to <a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">minecraft.net</a>, go to <a href="https://www.minecraft.net/redeem" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">Minecraft Redeem</a>, and click "Redeem". Then go to your Minecraft Bedrock game to equip the cape and join any server for 5 minutes. Finally, you'll see your cape in <span class="text-cyan-300 underline">View Cape & Skin</span>.</p>
+                    </details>
+
+                    <details class="app-card p-4 sm:p-5 rounded-xl">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                            <span><span class="text-pink-400 mr-2">?</span>What payment methods do you accept?</span>
+                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                        </summary>
+                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">We accept all Bakong's QR code is provided when u chatted to admin.</p>
+                    </details>
+
+                    <details class="app-card p-4 sm:p-5 rounded-xl">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                            <span><span class="text-pink-400 mr-2">?</span>Can I get a refund if the account doesn't work?</span>
+                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                        </summary>
+                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">We offer a 7-day replacement guarantee. If the account stops working, we'll replace it for free. No cash refunds.</p>
+                    </details>
+
+                    <details class="app-card p-4 sm:p-5 rounded-xl">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                            <span><span class="text-pink-400 mr-2">?</span>How do I change the account password?</span>
+                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                        </summary>
+                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Login to <a href="https://account.microsoft.com/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">microsoft.com</a>, go to Account Settings, and click "Change Password". We recommend changing it immediately.</p>
+                    </details>
+
+                    <details class="app-card p-4 sm:p-5 rounded-xl">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                            <span><span class="text-pink-400 mr-2">?</span>Do I need to provide anything after payment?</span>
+                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                        </summary>
+                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Just send your payment screenshot on Telegram and we'll deliver your account within minutes.</p>
+                    </details>
+                </div>
+            </section>
+
+            <!-- MEDIA / SOCIALS VIEW -->
+            <section id="view-media" class="tab-view space-y-10 hidden">
+                <div class="app-card px-6 py-10 sm:py-12 text-center relative overflow-hidden">
+                    <h2 class="app-header-title text-3xl sm:text-4xl font-bold mb-3 text-mcGold">Follow Our Media</h2>
+                    <p class="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto">Stay updated with our latest drops, gameplay, and Minecraft content!</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
+                    <!-- YouTube Card -->
+                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform">
+                        <div class="text-4xl sm:text-5xl text-red-600 group-hover:scale-110 transition-transform">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <h3 class="app-header-title text-lg font-bold text-white">YouTube</h3>
+                        <div class="text-mcGold font-semibold">@KbezMC</div>
+                        <p class="text-gray-300 text-xs">Watch our latest gameplay and shop showcases.</p>
+                        <a href="https://www.youtube.com/@KbezMC" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2 bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)]">
+                            <i class="fab fa-youtube"></i> Subscribe
+                        </a>
+                    </div>
+
+                    <!-- TikTok Card -->
+                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform">
+                        <div class="text-4xl sm:text-5xl text-white group-hover:scale-110 transition-transform">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                        <h3 class="app-header-title text-lg font-bold text-white">TikTok</h3>
+                        <div class="text-mcGold font-semibold">@kbez077</div>
+                        <p class="text-gray-300 text-xs">Short clips, tricks, and daily Minecraft shorts.</p>
+                        <a href="https://www.tiktok.com/@kbez077" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2 bg-black hover:bg-gray-900 border border-white/20 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                            <i class="fab fa-tiktok"></i> Follow
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+                <footer class="mt-auto border-t border-white/10 bg-black/80 py-8 px-4 text-center space-y-3">
+            <p class="text-xs text-gray-400 font-sans">KBEZ MC SHOP • ENHANCED EDITION</p>
+            <p class="text-xs text-gray-500">Not affiliated with Mojang Studios or Microsoft.</p>
+            
+            <p class="text-sm text-green-400 mt-2">
+                Contact: 
+                <a href="https://t.me/sokb07" style="color: #FFD700;" target="_blank" class="hover:underline font-bold">
+                    Admin on Telegram
+                </a>
+            </p>
+            
+            <!-- Cleaned up Social Media Icons -->
+            <div class="flex justify-center gap-6 mt-4 mb-2">
+                <a href="https://www.youtube.com/@KbezMC" target="_blank" class="text-gray-400 hover:text-red-500 transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@kbez077" target="_blank" class="text-gray-400 hover:text-white transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-tiktok"></i></a>
+                <a href="https://t.me/sokb07" target="_blank" class="text-gray-400 hover:text-blue-400 transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-telegram"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CART DRAWER -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black/80 z-50 hidden" onclick="toggleCart()"></div>
+    <div id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-gray-900 border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <div class="p-5 border-b border-white/10 flex items-center justify-between bg-black/40">
+            <h3 class="font-bold text-sm text-mcGold flex items-center gap-2">
+                <i class="fas fa-shopping-cart"></i> CART (<span id="cartItemCount">0</span>)
+            </h3>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-xl p-2"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="cartItemsContainer" class="flex-grow overflow-y-auto p-5 space-y-4"></div>
+        <div class="p-5 border-t border-white/10 bg-black/60 space-y-4">
+            <div class="flex justify-between items-center text-sm">
+                <span class="text-gray-300">TOTAL:</span>
+                <span id="cartTotalPrice" class="text-mcGold text-base font-bold">$0.00</span>
+            </div>
+            <button onclick="openCheckout()" id="checkoutBtn" disabled class="btn-primary w-full py-3 text-xs disabled:opacity-50">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
+
+        <!-- CHECKOUT MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 hidden">
+        <div class="app-card w-full max-w-lg p-6 sm:p-8 space-y-6 relative rounded-2xl">
+            <button onclick="closeCheckout()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            
+            <h3 class="app-header-title text-base sm:text-lg text-mcGold text-center font-bold">COMPLETE ORDER ON TELEGRAM</h3>
+            <p class="text-center text-gray-300 text-xs">Click the button below to send your cart details directly to our Telegram to finish your purchase.</p>
+            
+            <!-- Removed the username input -->
+            
+            <button onclick="submitOrder()" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
+                <i class="fab fa-telegram"></i> SEND TO TELEGRAM
+            </button>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 border border-emerald-500 px-6 py-3 rounded-xl text-white text-xs font-semibold"></div>
+
+    <script>
+    // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
+    let audioEnabled = true;
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSfx(type) {
+        if (!audioEnabled) return;
+        try {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(320, now);
+                osc.frequency.exponentialRampToValueAtTime(140, now + 0.04);
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.04);
+                osc.start(now); osc.stop(now + 0.04);
+            } 
+            else if (type === 'tab') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(450, now);
+                osc.frequency.exponentialRampToValueAtTime(680, now + 0.06);
+                gain.gain.setValueAtTime(0.08, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.06);
+                osc.start(now); osc.stop(now + 0.06);
+            }
+            else if (type === 'addCart') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(987.77, now);
+                osc.frequency.setValueAtTime(1318.51, now + 0.06);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                osc.start(now); osc.stop(now + 0.25);
+            }
+            else if (type === 'remove') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.exponentialRampToValueAtTime(70, now + 0.12);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+                osc.start(now); osc.stop(now + 0.12);
+            }
+            else if (type === 'fanfare') {
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((freq, i) => {
+                    const o = audioCtx.createOscillator();
+                    const g = audioCtx.createGain();
+                    o.connect(g); g.connect(audioCtx.destination);
+                    o.type = 'triangle';
+                    o.frequency.setValueAtTime(freq, now + (i * 0.07));
+                    g.gain.setValueAtTime(0.12, now + (i * 0.07));
+                    g.gain.exponentialRampToValueAtTime(0.01, now + (i * 0.07) + 0.2);
+                    o.start(now + (i * 0.07)); o.stop(now + (i * 0.07) + 0.2);
+                });
+            }
+        } catch (e) {}
+    }
+
+    function toggleAudio() {
+        audioEnabled = !audioEnabled;
+        
+        const btnDesktop = document.getElementById('soundBtnDesktop');
+        const btnMobile = document.getElementById('soundBtnMobile');
+        const html = audioEnabled ? '<i class="fas fa-volume-up text-emerald-400"></i><span>SFX: ON</span>' : '<i class="fas fa-volume-mute text-gray-400"></i><span>SFX: OFF</span>';
+        const htmlMobile = audioEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+
+        if (btnDesktop) btnDesktop.innerHTML = html;
+        if (btnMobile) btnMobile.innerHTML = htmlMobile;
+        
+        if (audioEnabled) playSfx('addCart');
+    }
+
+    // --- PRODUCT DATA ---
+    const productsData = {
+        accounts: [
+            { id: 'acc-1', title: 'Basic SFA Account', price: 9.99, origPrice: 14.99, discount: '-33% OFF', stock: 50, boughtCount: 32, rating: '4.9/5 (312)', badge: 'BESTSELLER', image: 'mc.jpg', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Basic+Account', features: ['Full Access Credentials', '0-1 Capes Included', 'Java & Bedrock Edition'] },
+            { id: 'acc-2', title: 'Standard Full Access', price: 11.99, origPrice: 17.99, discount: '-33% OFF', stock: 45, boughtCount: 48, rating: '4.8/5 (210)', badge: 'HOT', image: 'mc.jpg', fallback: 'https://placehold.co/300x180/111827/10b981?text=Standard+SFA', features: ['Full Access Credentials', '1-2 Capes Included', 'Java & Bedrock Edition'] },
+            { id: 'acc-3', title: 'Random Cape Account', price: 13.99, origPrice: 19.99, discount: '-30% OFF', stock:12, boughtCount: 19, rating: '5.0/5 (185)', badge: 'LIMITED', image: 'java.jpg', fallback: 'https://placehold.co/300x180/111827/10b981?text=Random+Cape', features: ['Full Access Credentials', '1-3 Random Capes', 'Java & Bedrock Edition'] },
+            { id: 'acc-4', title: 'Migrator Cape Account', price: 15.99, origPrice: 24.99, discount: '-36% OFF', stock: 20, boughtCount: 25, rating: '4.9/5 (410)', badge: 'RARE', image: 'Migrator.png', fallback: 'https://placehold.co/300x180/111827/3b82f6?text=Migrator+Cape', features: ['Full Access Credentials', 'Migrator + Pan Capes', 'Java & Bedrock Edition'] },
+            { id: 'acc-5', title: 'Cherry Blossom Account', price: 18.99, origPrice: 29.99, discount: '-37% OFF', stock: 10, boughtCount: 15, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'Cherry.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Cherry+Blossom', features: ['Full Access Credentials', 'Cherry Blossom Cape', 'Pan Cape'] },
+            { id: 'acc-6', title: 'Founder Cape Account', price: 27.99, origPrice: 39.99, discount: '-30% OFF', stock: 7, boughtCount: 7, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'founder.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Founder+Cape', features: ['Full Access Credentials', 'Founder Cape Included'] },
+            { id: 'acc-7', title: 'Follower Cape Account', price: 18.99, origPrice: 29.99, discount: '-30% OFF', stock: 16, boughtCount: 14, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'follower.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Follower+Cape', features: ['Full Access Credentials', 'Follower Cape Included'] },
+            { id: 'acc-8', title: 'Purple Heart Cape Account', price: 18.99, origPrice: 26.99, discount: '-30% OFF', stock: 19, boughtCount: 10, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'Purple.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Purple+Heart', features: ['Full Access Credentials', 'Purple Heart Cape'] },
+            { id: 'acc-9', title: 'Zombie Cape Account', price: 24.99, origPrice: 37.99, discount: '-30% OFF', stock: 6, boughtCount: 1, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'zombie.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Zombie+Cape', features: ['Full Access Credentials', 'Zombie Cape Included'] },
+            { id: 'acc-10', title: '15th Anniversary Cape Account', price: 15.99, origPrice: 22.99, discount: '-30% OFF', stock: 9, boughtCount: 8, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: '15th.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=15th+Anniversary', features: ['Full Access Credentials', '15th Anniversary Cape'] },
+            { id: 'acc-11', title: '15MCC Cape Account', price: 34.99, origPrice: 46.99, discount: '-30% OFF', stock: 5, boughtCount: 2, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'mcc.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=15MCC+Cape', features: ['Full Access Credentials', '15MCC Cape Included'] },
+            { id: 'acc-12', title: 'Vanilla Cape Account', price: 15.99, origPrice: 24.99, discount: '-30% OFF', stock: 10, boughtCount: 12, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'vanilla.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Vanilla+Cape', features: ['Full Access Credentials', 'Vanilla Cape Included'] },
+            { id: 'acc-13', title: 'Yearn Cape Account', price: 18.99, origPrice: 26.99, discount: '-30% OFF', stock: 7, boughtCount: 2, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'yearn.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Yearn+Cape', features: ['Full Access Credentials', 'Yearn Cape Included'] },
+            { id: 'acc-14', title: 'Mojang Office Cape Account', price: 18.99, origPrice: 26.99, discount: '-30% OFF', stock:5, boughtCount: 5, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'mojang.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Mojang+Office', features: ['Full Access Credentials', 'Office Cape Included'] }
+        ],
+        capes: [
+            { id: 'cape-1', title: 'Home Cape Code', price: 0.99, origPrice: 2.99, discount: '-67% OFF', stock: 40, boughtCount: 69, rating: '4.9/5 (520)', badge: 'POPULAR', image: 'Home.png', fallback: 'https://placehold.co/300x180/111827/10b981?text=Home+Cape', features: ['Java & Bedrock Redeem'] },
+            { id: 'cape-2', title: 'Copper Cape Code', price: 0.99, origPrice: 2.99, discount: '-67% OFF', stock: 39, boughtCount: 30, rating: '4.8/5 (340)', badge: null, image: 'Copper.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
+            { id: 'cape-3', title: 'Builder Cape Code', price: 0.99, origPrice: 2.99, discount: '-67% OFF', stock: 53, boughtCount: 61, rating: '4.7/5 (340)', badge: null, image: 'builder.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
+            { id: 'cape-4', title: 'Aurora Cape Code', price: 0.99, origPrice: 2.99, discount: '-67% OFF', stock: 36, boughtCount: 75, rating: '5/5 (340)', badge: 'NEW', image: 'aurora.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
+            { id: 'cape-5', title: 'Menace Cape Code', price: 1.99, origPrice: 2.99, discount: '-67% OFF', stock: 47, boughtCount: 49, rating: '4.8/5 (340)', badge: null, image: 'menace.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
+            { id: 'cape-6', title: 'Purple Heart Cape Code', price: 9.99, origPrice: 12.99, discount: '-67% OFF', stock: 5, boughtCount: 10, rating: '4.9/5 (340)', badge: null, image: 'purple.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
+        ],
+        misc: [
+            { 
+                id: 'm-1', 
+                title: "Kbez PVP PACK 16x", 
+                size: '6.1 MB', 
+                file: 'Kbez PVP Pack 16x.zip', 
+                boughtCount: 100, 
+                features: ['FPS Boost', 'Optimized PvP'] 
+            },
+            { 
+                id: 'm-2', 
+                title: "Kbez Mace PVP Pack 16x", 
+                size: '7.1 MB', 
+                file: 'Kbez MacePVP Pack 16x.zip', 
+                boughtCount: 100, 
+                features: ['Mace Textures', 'High FPS'] 
+            },
+            { 
+                id: 'm-3', 
+                title: "Metaanie PVP Pack", 
+                size: '20.1 MB', 
+                file: 'MetaaniePacks_Metaanie_Vanilla_PACK.zip', 
+                boughtCount: 500, 
+                features: ['Custom Sky', 'High Definition'] 
+            },
+            { 
+                id: 'm-4', 
+                title: "Cat Durability Pack", 
+                size: '5.0 MB', 
+                file: 'Durability Pack by Cat.zip', 
+                boughtCount: 300, 
+                features: ['Item Durability', 'Clean HUD'] 
+            },
+            { 
+                id: 'm-5', 
+                title: "TheoBald's 1.3 Practice Map", 
+                size: '16.2 MB', 
+                file: 'Theobalds PVP Practice 1.3.zip', 
+                boughtCount: 1020, 
+                features: ['PvP World', 'Java Edition'] 
+            }
+        ]
+    };
+
+    let cart = [];
+
+    function setTheme(themeName) {
+        const validThemes = ['modern', 'pixel', 'cyber', 'luxury'];
+        if (!validThemes.includes(themeName)) return;
+
+        playSfx('click');
+        document.body.className = `theme-${themeName} min-h-screen flex flex-col antialiased`;
+
+        document.querySelectorAll('.theme-switcher-tab').forEach(button => {
+            const active = button.id === `tab-${themeName}`;
+            button.classList.toggle('is-active', active);
+            button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+
+        renderCatalogs();
+    }
+
+    function renderCardHTML(p, type) {
+        // Determine which button to show based on the type
+        const actionButton = (type === 'cape') 
+            ? `<button onclick="buyNowTelegram('${p.title}', ${p.price})" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2"><i class="fab fa-telegram"></i> BUY NOW</button>`
+            : `<button onclick="addToCart('${p.id}', '${p.title}', ${p.price})" class="btn-primary w-full py-3 text-xs">ADD TO CART</button>`;
+
+        return `
+            <div class="app-card p-6 flex flex-col justify-between relative">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">⚡ ${p.boughtCount}+ BOUGHT</span>
+                    ${p.badge ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-600 text-white">${p.badge}</span>` : `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">${p.discount}</span>`}
+                </div>
+                <div class="w-full h-44 bg-black/60 rounded-xl mb-4 flex items-center justify-center overflow-hidden border border-white/10">
+                    <img src="${p.image}" alt="${p.title}" class="h-full object-contain" onerror="this.src='${p.fallback}'">
+                </div>
+                <h3 class="font-bold text-sm text-white mb-1">${p.title}</h3>
+                <div class="text-[11px] text-gray-400 mb-3"><i class="fas fa-star text-mcGold"></i> ${p.rating}</div>
+                <div class="flex items-baseline gap-2 mb-4 bg-black/40 p-2.5 rounded-xl border border-white/5">
+                    <span class="text-2xl font-black text-mcGold">$${p.price.toFixed(2)}</span>
+                    <span class="text-xs text-gray-500 line-through">$${p.origPrice.toFixed(2)}</span>
+                </div>
+                <ul class="space-y-2 mb-6 text-xs text-gray-300">
+                    ${p.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400"></i> ${f}</li>`).join('')}
+                </ul>
+                ${actionButton}
+            </div>
+        `;
+    }
+
+    function renderAllGrid() {
+        // FIX: Pass 'account' and 'cape' so the correct buttons render
+        const accountCards = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
+        const capeCards = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
+        
+        const miscCards = productsData.misc.map(m => `
+            <div class="app-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">⚡ ${m.boughtCount}+ Downloads</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1">
+                            <i class="fas fa-save text-[8px]"></i> ${m.size}
+                        </span>
+                    </div>
+                    <div class="w-full h-36 bg-black/60 rounded-xl mb-4 flex items-center justify-center border border-white/5">
+                        <i class="fas fa-file-archive text-amber-500 text-4xl"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
+                    <ul class="space-y-2 mb-6 text-xs text-gray-300">
+                        ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
+                    </ul>
+                </div>
+                <a href="${m.file}" download class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                    <i class="fas fa-download"></i> DOWNLOAD FREE PACK
+                </a>
+            </div>
+        `).join('');
+        
+        document.getElementById('allGrid').innerHTML = accountCards + capeCards + miscCards;
+    }
+
+    function renderCatalogs() {
+        renderAllGrid();
+        
+        // FIX: Pass the types correctly here as well
+        document.getElementById('accountsGrid').innerHTML = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
+        document.getElementById('capesGrid').innerHTML = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
+        
+        document.getElementById('miscGrid').innerHTML = productsData.misc.map(m => `
+            <div class="app-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">⚡ ${m.boughtCount}+ Downloads</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1">
+                            <i class="fas fa-save text-[8px]"></i> ${m.size}
+                        </span>
+                    </div>
+                    <div class="w-full h-36 bg-black/60 rounded-xl mb-4 flex items-center justify-center border border-white/5">
+                        <i class="fas fa-file-archive text-amber-500 text-4xl"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
+                    <ul class="space-y-2 mb-6 text-xs text-gray-300">
+                        ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
+                    </ul>
+                </div>
+                <a href="${m.file}" download class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                    <i class="fas fa-download"></i> DOWNLOAD FREE PACK
+                </a>
+            </div>
+        `).join('');
+    }
+
+    function switchTab(tabId) {
+        playSfx('tab');
+        document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
+        const target = document.getElementById(`view-${tabId}`);
+        if (target) target.classList.remove('hidden');
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            const active = btn.dataset.tab === tabId;
+            btn.classList.toggle('btn-primary', active);
+            btn.classList.toggle('text-gray-300', !active);
+            btn.classList.toggle('hover:text-white', !active);
+        });
+    }
+
+    function toggleCart() {
+        playSfx('click');
+        document.getElementById('cartDrawer').classList.toggle('translate-x-full');
+        document.getElementById('cartOverlay').classList.toggle('hidden');
+    }
+
+    function addToCart(id, title, price) {
+        playSfx('addCart');
+        const item = cart.find(i => i.id === id);
+        if (item) item.qty += 1; else cart.push({ id, title, price, qty: 1 });
+        updateCartUI();
+        showToast(`Added "${title}" to cart!`);
+    }
+
+    function removeFromCart(id) {
+        playSfx('remove');
+        const itemIndex = cart.findIndex(i => i.id === id);
+        if (itemIndex > -1) {
+            cart[itemIndex].qty -= 1;
+            if (cart[itemIndex].qty === 0) {
+                cart.splice(itemIndex, 1);
+            }
+        }
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const count = cart.reduce((sum, i) => sum + i.qty, 0);
+        const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+        
+        document.getElementById('desktopCartCount').textContent = count;
+        document.getElementById('mobileCartCount').textContent = count;
+        document.getElementById('cartItemCount').textContent = count;
+        
+        document.getElementById('cartTotalPrice').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('checkoutBtn').disabled = cart.length === 0;
+
+        document.getElementById('cartItemsContainer').innerHTML = cart.map(i => `
+            <div class="bg-black/60 p-3 rounded-xl flex justify-between items-center text-xs text-white">
+                <div class="flex flex-col gap-1">
+                    <span>${i.title} (x${i.qty})</span>
+                    <button onclick="removeFromCart('${i.id}')" class="text-red-400 hover:text-red-300 text-left w-max text-[10px]"><i class="fas fa-trash"></i> Remove</button>
+                </div>
+                <span class="text-mcGold font-bold">$${(i.price * i.qty).toFixed(2)}</span>
+            </div>
+        `).join('');
+    }
+
+    function buyNowTelegram(title, price) {
+        playSfx('addCart'); 
+        const message = `Hello! I want to buy: ${title} for $${price.toFixed(2)}`;
+        window.open(`https://t.me/Sok_Assistant_Bot?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function openCheckout() {
+        playSfx('click');
+        toggleCart();
+        document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+
+    function closeCheckout() {
+        playSfx('remove');
+        document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+        function submitOrder() {
+        // If cart is empty, do nothing
+        if (cart.length === 0) return; 
+        
+        playSfx('fanfare'); 
+        
+        // 1. Build the message from the cart items
+        let text = `🛒 *New Order Request*\n\n`;
+        cart.forEach(item => {
+            text += `▪️ ${item.title} (x${item.qty}) - $${(item.price * item.qty).toFixed(2)}\n`;
+        });
+        
+        // 2. Add the total
+        const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+        text += `\n💰 *Total:* $${total.toFixed(2)}\n\n`;
+        text += `Hello admin, I would like to purchase these items.`;
+
+        // 3. Redirect to your Telegram
+        // Change the URL below if you want it to go to your Bot instead
+        window.open(`https://t.me/sokb07?text=${encodeURIComponent(text)}`, '_blank');
+        
+        // 4. Clear cart and close modal
+        cart = [];
+        updateCartUI();
+        closeCheckout();
+    }
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.remove('translate-y-24', 'opacity-0');
+        setTimeout(() => t.classList.add('translate-y-24', 'opacity-0'), 2500);
+    }
+
+    function handleSearch(query) {
+        const q = query.toLowerCase().trim();
+        document.querySelectorAll('.app-card').forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = q === '' || text.includes(q) ? '' : 'none';
+        });
+    }
+
+    function toggleMobileMenu() {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function toggleMobileView() {
+        showToast("Mobile frame view toggled (Mockup)");
+    }
+    function openCodeModal() {
+        showToast("Theme code inspector opened (Mockup)");
+    }
+
+    window.onload = () => { setTheme('modern'); switchTab('all'); };
+</script>
+</body>
+</html>
