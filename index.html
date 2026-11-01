@@ -734,7 +734,7 @@
 
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 border border-emerald-500 px-6 py-3 rounded-xl text-white text-xs font-semibold"></div>
 
-    <script>
+   <script>
     // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
     let audioEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -877,16 +877,16 @@
                 file: 'Theobalds PVP Practice 1.3.zip', 
                 boughtCount: 1020, 
                 features: ['PvP World', 'Java Edition']
-            }
+            }, // 👈 MISSING COMMA ADDED HERE
             { 
                 id: 'm-6', 
                 title: "MinecraftMCPE Android App (APK)", 
                 size: '25.0 MB', 
-                file: 'https://www.goldeniq.xyz/MinecraftApk', // 👈 Replace this with your friend's actual website link
+                file: 'https://www.goldeniq.xyz/MinecraftApk', 
                 boughtCount: 1500, 
                 features: ['Android Only', 'Easy Install'],
                 isExternal: true ,
-                image: 'android.jpg' // 👈 Add your image file name or URL here
+                image: 'android.jpg' 
             }
         ]
     };
@@ -910,7 +910,6 @@
     }
 
     function renderCardHTML(p, type) {
-        // Determine which button to show based on the type
         const actionButton = (type === 'cape') 
             ? `<button onclick="buyNowTelegram('${p.title}', ${p.price})" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2"><i class="fab fa-telegram"></i> BUY NOW</button>`
             : `<button onclick="addToCart('${p.id}', '${p.title}', ${p.price})" class="btn-primary w-full py-3 text-xs">ADD TO CART</button>`;
@@ -939,7 +938,6 @@
     }
 
     function renderAllGrid() {
-        // FIX: Pass 'account' and 'cape' so the correct buttons render
         const accountCards = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         const capeCards = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
         
@@ -952,12 +950,12 @@
                             <i class="fas fa-save text-[8px]"></i> ${m.size}
                         </span>
                     </div>
-                                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
+                    <!-- FIXED: Removed the extra </div> that was here -->
+                    <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
                         ${m.image 
                             ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` 
                             : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`
                         }
-                    </div>
                     </div>
                     <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
                     <ul class="space-y-2 mb-6 text-xs text-gray-300">
@@ -976,7 +974,6 @@
     function renderCatalogs() {
         renderAllGrid();
         
-        // FIX: Pass the types correctly here as well
         document.getElementById('accountsGrid').innerHTML = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         document.getElementById('capesGrid').innerHTML = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
         
@@ -989,20 +986,20 @@
                             <i class="fas fa-save text-[8px]"></i> ${m.size}
                         </span>
                     </div>
-                                   <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
+                    <!-- FIXED: Removed the extra </div> that was here -->
+                    <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
                         ${m.image 
                             ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` 
                             : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`
                         }
-                    </div>
                     </div>
                     <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
                     <ul class="space-y-2 mb-6 text-xs text-gray-300">
                         ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
                     </ul>
                 </div>
-                <a href="${m.file}" download class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                    <i class="fas fa-download"></i> DOWNLOAD FREE PACK
+                <a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                    <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
                 </a>
             </div>
         `).join('');
@@ -1069,17 +1066,10 @@
         `).join('');
     }
 
-       function buyNowTelegram(title, price) {
+    function buyNowTelegram(title, price) {
         playSfx('addCart'); 
-        
-        // 1. Clean up the title (e.g., turns "Home Cape Code" into "Home")
-        // This makes it easier for your bot to read the command.
         const cleanTitle = title.replace(' Code', ''); 
-        
-        // 2. Format it as a bot command
         const command = `/buy ${cleanTitle}`;
-        
-        // 3. Redirect to your bot with the command pre-filled
         window.open(`https://t.me/Sok_Assistant_Bot?text=${encodeURIComponent(command)}`, '_blank');
     }
 
@@ -1094,32 +1084,27 @@
         document.getElementById('checkoutModal').classList.add('hidden');
     }
 
-        function submitOrder() {
-        // If cart is empty, do nothing
+    function submitOrder() {
         if (cart.length === 0) return; 
         
         playSfx('fanfare'); 
         
-        // 1. Build the message from the cart items
         let text = `🛒 *New Order Request*\n\n`;
         cart.forEach(item => {
             text += `▪️ ${item.title} (x${item.qty}) - $${(item.price * item.qty).toFixed(2)}\n`;
         });
         
-        // 2. Add the total
         const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
         text += `\n💰 *Total:* $${total.toFixed(2)}\n\n`;
         text += `Hello admin, I would like to purchase these items.`;
 
-        // 3. Redirect to your Telegram
-        // Change the URL below if you want it to go to your Bot instead
         window.open(`https://t.me/sokb07?text=${encodeURIComponent(text)}`, '_blank');
         
-        // 4. Clear cart and close modal
         cart = [];
         updateCartUI();
         closeCheckout();
     }
+
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
