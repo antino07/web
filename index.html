@@ -734,7 +734,7 @@
 
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 border border-emerald-500 px-6 py-3 rounded-xl text-white text-xs font-semibold"></div>
 
-   <script>
+  <script>
     // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
     let audioEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -877,7 +877,7 @@
                 file: 'Theobalds PVP Practice 1.3.zip', 
                 boughtCount: 1020, 
                 features: ['PvP World', 'Java Edition']
-            }, 
+            }, // 👈 COMMA ADDED HERE
             { 
                 id: 'm-6', 
                 title: "MinecraftMCPE Android App (APK)", 
@@ -950,7 +950,6 @@
                             <i class="fas fa-save text-[8px]"></i> ${m.size}
                         </span>
                     </div>
-                    <!-- FIXED: Removed the extra </div> that was here -->
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
                         ${m.image 
                             ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` 
@@ -986,7 +985,6 @@
                             <i class="fas fa-save text-[8px]"></i> ${m.size}
                         </span>
                     </div>
-                    <!-- FIXED: Removed the extra </div> that was here -->
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
                         ${m.image 
                             ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` 
