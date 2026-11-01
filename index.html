@@ -876,7 +876,16 @@
                 size: '16.2 MB', 
                 file: 'Theobalds PVP Practice 1.3.zip', 
                 boughtCount: 1020, 
-                features: ['PvP World', 'Java Edition'] 
+                features: ['PvP World', 'Java Edition']
+            }
+            { 
+                id: 'm-6', 
+                title: "MinecraftMCPE Android App (APK)", 
+                size: '25.0 MB', 
+                file: 'https://www.goldeniq.xyz/MinecraftApk', // 👈 Replace this with your friend's actual website link
+                boughtCount: 1500, 
+                features: ['Android Only', 'Easy Install'],
+                isExternal: true 
             }
         ]
     };
@@ -950,8 +959,8 @@
                         ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
                     </ul>
                 </div>
-                <a href="${m.file}" download class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                    <i class="fas fa-download"></i> DOWNLOAD FREE PACK
+                <a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                    <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
                 </a>
             </div>
         `).join('');
