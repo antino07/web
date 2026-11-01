@@ -952,8 +952,12 @@
                             <i class="fas fa-save text-[8px]"></i> ${m.size}
                         </span>
                     </div>
-                  <div class="w-full h-36 bg-white rounded-xl mb-4 flex items-center justify-center border border-gray-200">
-                        <i class="fas fa-file-archive text-amber-500 text-4xl"></i>
+                                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
+                        ${m.image 
+                            ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` 
+                            : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`
+                        }
+                    </div>
                     </div>
                     <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
                     <ul class="space-y-2 mb-6 text-xs text-gray-300">
