@@ -1051,10 +1051,18 @@
         `).join('');
     }
 
-    function buyNowTelegram(title, price) {
+       function buyNowTelegram(title, price) {
         playSfx('addCart'); 
-        const message = `Hello! I want to buy: ${title} for $${price.toFixed(2)}`;
-        window.open(`https://t.me/Sok_Assistant_Bot?text=${encodeURIComponent(message)}`, '_blank');
+        
+        // 1. Clean up the title (e.g., turns "Home Cape Code" into "Home")
+        // This makes it easier for your bot to read the command.
+        const cleanTitle = title.replace(' Code', ''); 
+        
+        // 2. Format it as a bot command
+        const command = `/buy ${cleanTitle}`;
+        
+        // 3. Redirect to your bot with the command pre-filled
+        window.open(`https://t.me/Sok_Assistant_Bot?text=${encodeURIComponent(command)}`, '_blank');
     }
 
     function openCheckout() {
