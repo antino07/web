@@ -1189,12 +1189,13 @@
           // Disable Right Click
     document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Disable F12 and Ctrl+Shift+I (Developer Tools)
+       // Disable F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U, and Ctrl+S
     document.onkeydown = function(e) {
         if (e.keyCode == 123) { return false; } // F12
         if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // Ctrl+Shift+I
         if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // Ctrl+Shift+C
         if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U (View Source)
+        if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { return false; } // Ctrl+S (Save Page)
     };
 </script>
 </body>
