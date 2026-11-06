@@ -674,9 +674,13 @@
 
         </main>
 
-                <footer class="mt-auto border-t border-white/10 bg-black/80 py-8 px-4 text-center space-y-3">
-            <p class="text-xs text-gray-400 font-sans">KBEZ MC SHOP • ENHANCED EDITION</p>
+                       <footer class="mt-auto border-t border-white/10 bg-black/80 py-8 px-4 text-center space-y-3">
+            <!-- COPYRIGHT LINE HERE -->
+            <p class="text-xs text-gray-400 font-sans">&copy; <span id="current-year"></span> KBEZ MC SHOP. All rights reserved.</p>
+            
             <p class="text-xs text-gray-500">Not affiliated with Mojang Studios or Microsoft.</p>
+            
+            <!-- Rest of your footer... -->
             
             <p class="text-sm text-green-400 mt-2">
                 Contact: 
@@ -1180,6 +1184,18 @@
     }
 
     window.onload = () => { setTheme('modern'); switchTab('all'); };
+          // Automatically update the copyright year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+          // Disable Right Click
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Disable F12 and Ctrl+Shift+I (Developer Tools)
+    document.onkeydown = function(e) {
+        if (e.keyCode == 123) { return false; } // F12
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // Ctrl+Shift+I
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // Ctrl+Shift+C
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U (View Source)
+    };
 </script>
 </body>
 </html>
