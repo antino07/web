@@ -450,7 +450,7 @@
             <span class="flex items-center gap-2"><i class="fas fa-users text-mcGold"></i> 450+ SATISFIED CUSTOMERS</span>
         </div>
 
-        <nav class="bg-black/50 border-b border-white/10 px-4 sm:px-8 py-4 sticky top-14 z-40 backdrop-blur-md">
+                <nav class="bg-black/50 border-b border-white/10 px-4 sm:px-8 py-4 sticky top-14 z-40 backdrop-blur-md">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                 
                 <div class="flex items-center justify-between w-full md:w-auto">
@@ -475,7 +475,8 @@
                     </div>
                 </div>
 
-                <div class="relative w-full md:w-72">
+                <!-- THE FIX IS HERE: Added order-3 md:order-none -->
+                <div class="relative w-full md:w-72 order-3 md:order-none">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                         <i class="fas fa-search"></i>
                     </span>
@@ -489,8 +490,6 @@
                     <button onclick="switchTab('misc')" data-tab="misc" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Misc</button>
                     <button onclick="switchTab('media')" data-tab="media" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Media</button>
                     <button onclick="switchTab('contact')" data-tab="contact" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Support & FAQ</button>
-                    
-                    
                 </div>
 
                 <div class="hidden md:flex items-center gap-3">
@@ -513,8 +512,6 @@
                 <button onclick="switchTab('misc'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📦 Misc</button>
                 <button onclick="switchTab('media'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📱 Media</button>
                 <button onclick="switchTab('contact'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">💬 Support & FAQ</button>
-                
-
             </div>
         </nav>
 
@@ -733,6 +730,16 @@
     </div>
 
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 border border-emerald-500 px-6 py-3 rounded-xl text-white text-xs font-semibold"></div>
+        <!-- FLOATING MOBILE CART CHECKOUT -->
+    <div id="floatingCartBar" class="fixed bottom-4 left-4 right-4 z-40 bg-emerald-600 rounded-xl p-3 shadow-2xl flex justify-between items-center transform translate-y-32 transition-transform duration-300 md:hidden">
+        <div class="flex items-center gap-2 text-white">
+            <i class="fas fa-shopping-cart text-lg"></i>
+            <span class="font-bold text-sm" id="floatingCartTotal">$0.00</span>
+        </div>
+        <button onclick="submitOrder()" class="bg-black text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2">
+            CHECKOUT <i class="fab fa-telegram"></i>
+        </button>
+    </div>
 
   <script>
     // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
@@ -1071,7 +1078,7 @@
         updateCartUI();
     }
 
-    function updateCartUI() {
+        function updateCartUI() {
         const count = cart.reduce((sum, i) => sum + i.qty, 0);
         const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
         
@@ -1091,6 +1098,17 @@
                 <span class="text-mcGold font-bold">$${(i.price * i.qty).toFixed(2)}</span>
             </div>
         `).join('');
+
+        // NEW: Toggle the floating mobile cart bar
+        const floatingBar = document.getElementById('floatingCartBar');
+        const floatingTotal = document.getElementById('floatingCartTotal');
+        
+        if (cart.length > 0) {
+            floatingTotal.textContent = `$${total.toFixed(2)}`;
+            floatingBar.classList.remove('translate-y-32');
+        } else {
+            floatingBar.classList.add('translate-y-32');
+        }
     }
 
     function buyNowTelegram(title, price) {
