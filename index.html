@@ -744,8 +744,23 @@
             CHECKOUT <i class="fab fa-telegram"></i>
         </button>
     </div>
+        <!-- FLOATING PC CART WIDGET -->
+    <div id="floatingPcCart" class="fixed bottom-8 right-8 z-40 bg-gray-900 border border-emerald-500/50 rounded-2xl p-4 shadow-[0_10px_40px_rgba(16,185,129,0.2)] hidden md:flex items-center justify-between gap-6 transform translate-y-32 opacity-0 transition-all duration-300">
+        <div class="flex items-center gap-3">
+            <div class="bg-emerald-500/20 p-3 rounded-xl text-emerald-400">
+                <i class="fas fa-shopping-cart text-xl"></i>
+            </div>
+            <div class="flex flex-col">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Added to Cart</span>
+                <span class="font-black text-white text-lg" id="floatingPcCartTotal">$0.00</span>
+            </div>
+        </div>
+        <button onclick="toggleCart()" class="bg-emerald-500 hover:bg-emerald-400 text-black px-4 py-2 rounded-xl text-xs font-bold transition">
+            VIEW CART
+        </button>
+    </div>
 
-  <script>
+   <script>
     // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
     let audioEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -810,7 +825,6 @@
 
     function toggleAudio() {
         audioEnabled = !audioEnabled;
-        
         const btnDesktop = document.getElementById('soundBtnDesktop');
         const btnMobile = document.getElementById('soundBtnMobile');
         const html = audioEnabled ? '<i class="fas fa-volume-up text-emerald-400"></i><span>SFX: ON</span>' : '<i class="fas fa-volume-mute text-gray-400"></i><span>SFX: OFF</span>';
@@ -818,14 +832,12 @@
 
         if (btnDesktop) btnDesktop.innerHTML = html;
         if (btnMobile) btnMobile.innerHTML = htmlMobile;
-        
         if (audioEnabled) playSfx('addCart');
     }
 
     // --- PRODUCT DATA ---
     const productsData = {
-               accounts: [
-            // --- BUDGET & STANDARD (Under $15) ---
+        accounts: [
             { id: 'acc-1', title: 'Basic SFA Account', price: 9.99, origPrice: 14.99, discount: '-33% OFF', stock: 0, boughtCount: 32, rating: '4.9/5 (312)', badge: 'BESTSELLER', image: 'mc.jpg', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Basic+Account', features: ['Full Access Credentials', '0-1 Capes Included', 'Java & Bedrock Edition'] },
             { id: 'acc-2', title: 'Standard Full Access', price: 11.99, origPrice: 17.99, discount: '-33% OFF', stock: 45, boughtCount: 48, rating: '4.8/5 (210)', badge: 'HOT', image: 'mc.jpg', fallback: 'https://placehold.co/300x180/111827/10b981?text=Standard+SFA', features: ['Full Access Credentials', '1-2 Capes Included', 'Java & Bedrock Edition'] },
             { id: 'acc-3', title: 'Random Cape Account', price: 13.99, origPrice: 19.99, discount: '-30% OFF', stock:12, boughtCount: 19, rating: '5.0/5 (185)', badge: 'LIMITED', image: 'java.jpg', fallback: 'https://placehold.co/300x180/111827/10b981?text=Random+Cape', features: ['Full Access Credentials', '1-3 Random Capes', 'Java & Bedrock Edition'] },
@@ -837,8 +849,6 @@
             { id: 'acc-14', title: 'Mojang Office Cape Account', price: 18.99, origPrice: 26.99, discount: '-30% OFF', stock:5, boughtCount: 5, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'mojang.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Mojang+Office', features: ['Full Access Credentials', 'Office Cape Included'] },
             { id: 'acc-13', title: 'Yearn Cape Account', price: 19.99, origPrice: 29.99, discount: '-30% OFF', stock: 7, boughtCount: 2, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'yearn.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Yearn+Cape', features: ['Full Access Credentials', 'Yearn Cape Included'] },
             { id: 'acc-5', title: 'Cherry Blossom Account', price: 19.99, origPrice: 29.99, discount: '-37% OFF', stock: 10, boughtCount: 15, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'Cherry.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Cherry+Blossom', features: ['Full Access Credentials', 'Cherry Blossom Cape', 'Pan Cape'] },
-
-            // --- PREMIUM (Over $20) ---
             { id: 'acc-9', title: 'Zombie Cape Account', price: 24.99, origPrice: 37.99, discount: '-30% OFF', stock: 6, boughtCount: 1, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'zombie.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Zombie+Cape', features: ['Full Access Credentials', 'Zombie Cape Included'] },
             { id: 'acc-6', title: 'Founder Cape Account', price: 27.99, origPrice: 39.99, discount: '-30% OFF', stock: 7, boughtCount: 7, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'Founder.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=Founder+Cape', features: ['Full Access Credentials', 'Founder Cape Included'] },
             { id: 'acc-11', title: '15MCC Cape Account', price: 34.99, origPrice: 46.99, discount: '-30% OFF', stock: 5, boughtCount: 2, rating: '5.0/5 (142)', badge: 'EXCLUSIVE', image: 'mcc.png', fallback: 'https://placehold.co/300x180/111827/ec4899?text=15MCC+Cape', features: ['Full Access Credentials', '15MCC Cape Included'] }
@@ -849,59 +859,15 @@
             { id: 'cape-3', title: 'Builder Cape Code', price: 0.99, origPrice: 2.99, discount: '-67% OFF', stock: 53, boughtCount: 61, rating: '4.7/5 (340)', badge: null, image: 'builder.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
             { id: 'cape-4', title: 'Aurora Cape Code', price: 0.99, origPrice: 2.99, discount: '-67% OFF', stock: 36, boughtCount: 75, rating: '5/5 (340)', badge: 'NEW', image: 'aurora.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
             { id: 'cape-5', title: 'Menace Cape Code', price: 1.99, origPrice: 2.99, discount: '-67% OFF', stock: 47, boughtCount: 49, rating: '4.8/5 (340)', badge: null, image: 'Menace.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
-            { id: 'cape-6', title: 'Purple Heart Cape Code', price: 9.99, origPrice: 12.99, discount: '-67% OFF', stock: 5, boughtCount: 10, rating: '4.9/5 (340)', badge: null, image: 'Purple.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] },
+            { id: 'cape-6', title: 'Purple Heart Cape Code', price: 9.99, origPrice: 12.99, discount: '-67% OFF', stock: 5, boughtCount: 10, rating: '4.9/5 (340)', badge: null, image: 'Purple.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] }
         ],
         misc: [
-            { 
-                id: 'm-1', 
-                title: "Kbez PVP PACK 16x", 
-                size: '6.1 MB', 
-                file: 'Kbez PVP Pack 16x.zip', 
-                boughtCount: 100, 
-                features: ['FPS Boost', 'Optimized PvP'] 
-            },
-            { 
-                id: 'm-2', 
-                title: "Kbez Mace PVP Pack 16x", 
-                size: '7.1 MB', 
-                file: 'Kbez MacePVP Pack 16x.zip', 
-                boughtCount: 100, 
-                features: ['Mace Textures', 'High FPS'] 
-            },
-            { 
-                id: 'm-3', 
-                title: "Metaanie PVP Pack", 
-                size: '20.1 MB', 
-                file: 'MetaaniePacks_Metaanie_Vanilla_PACK.zip', 
-                boughtCount: 500, 
-                features: ['Custom Sky', 'High Definition'] 
-            },
-            { 
-                id: 'm-4', 
-                title: "Cat Durability Pack", 
-                size: '5.0 MB', 
-                file: 'Durability Pack by Cat.zip', 
-                boughtCount: 300, 
-                features: ['Item Durability', 'Clean HUD'] 
-            },
-            { 
-                id: 'm-5', 
-                title: "TheoBald's 1.3 Practice Map", 
-                size: '16.2 MB', 
-                file: 'Theobalds PVP Practice 1.3.zip', 
-                boughtCount: 1020, 
-                features: ['PvP World', 'Java Edition']
-            }, // 👈 COMMA ADDED HERE
-            { 
-                id: 'm-6', 
-                title: "MinecraftMCPE Android App (APK)", 
-                size: '25.0 MB', 
-                file: 'https://www.goldeniq.xyz/MinecraftApk', 
-                boughtCount: 1500, 
-                features: ['Android Only', 'Easy Install'],
-                isExternal: true ,
-                image: 'andriod.jpg' 
-            }
+            { id: 'm-1', title: "Kbez PVP PACK 16x", size: '6.1 MB', file: 'Kbez PVP Pack 16x.zip', boughtCount: 100, features: ['FPS Boost', 'Optimized PvP'] },
+            { id: 'm-2', title: "Kbez Mace PVP Pack 16x", size: '7.1 MB', file: 'Kbez MacePVP Pack 16x.zip', boughtCount: 100, features: ['Mace Textures', 'High FPS'] },
+            { id: 'm-3', title: "Metaanie PVP Pack", size: '20.1 MB', file: 'MetaaniePacks_Metaanie_Vanilla_PACK.zip', boughtCount: 500, features: ['Custom Sky', 'High Definition'] },
+            { id: 'm-4', title: "Cat Durability Pack", size: '5.0 MB', file: 'Durability Pack by Cat.zip', boughtCount: 300, features: ['Item Durability', 'Clean HUD'] },
+            { id: 'm-5', title: "TheoBald's 1.3 Practice Map", size: '16.2 MB', file: 'Theobalds PVP Practice 1.3.zip', boughtCount: 1020, features: ['PvP World', 'Java Edition'] },
+            { id: 'm-6', title: "MinecraftMCPE Android App (APK)", size: '25.0 MB', file: 'https://www.goldeniq.xyz/MinecraftApk', boughtCount: 1500, features: ['Android Only', 'Easy Install'], isExternal: true, image: 'andriod.jpg' }
         ]
     };
 
@@ -910,21 +876,17 @@
     function setTheme(themeName) {
         const validThemes = ['modern', 'pixel', 'cyber', 'luxury'];
         if (!validThemes.includes(themeName)) return;
-
         playSfx('click');
         document.body.className = `theme-${themeName} min-h-screen flex flex-col antialiased`;
-
         document.querySelectorAll('.theme-switcher-tab').forEach(button => {
             const active = button.id === `tab-${themeName}`;
             button.classList.toggle('is-active', active);
             button.setAttribute('aria-pressed', active ? 'true' : 'false');
         });
-
         renderCatalogs();
     }
 
-        function renderCardHTML(p, type) {
-        // 1. Check if it is out of stock
+    function renderCardHTML(p, type) {
         if (p.stock === 0) {
             return `
                 <div class="app-card p-6 flex flex-col justify-between relative opacity-75">
@@ -944,19 +906,15 @@
                     <ul class="space-y-2 mb-6 text-xs text-gray-500">
                         ${p.features.map(f => `<li><i class="fas fa-check-circle text-gray-600"></i> ${f}</li>`).join('')}
                     </ul>
-                    <button disabled class="w-full py-3 text-xs bg-gray-800 text-gray-500 font-bold rounded-xl cursor-not-allowed border border-gray-700">
-                        OUT OF STOCK
-                    </button>
+                    <button disabled class="w-full py-3 text-xs bg-gray-800 text-gray-500 font-bold rounded-xl cursor-not-allowed border border-gray-700">OUT OF STOCK</button>
                 </div>
             `;
         }
 
-        // 2. If it is in stock, check if it's a cape (for the Telegram button)
         const actionButton = (type === 'cape') 
             ? `<button onclick="buyNowTelegram('${p.title}', ${p.price})" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2"><i class="fab fa-telegram"></i> BUY NOW</button>`
             : `<button onclick="addToCart('${p.id}', '${p.title}', ${p.price})" class="btn-primary w-full py-3 text-xs">ADD TO CART</button>`;
 
-        // 3. Render the normal card if in stock
         return `
             <div class="app-card p-6 flex flex-col justify-between relative">
                 <div class="flex items-center justify-between gap-2 mb-3">
@@ -994,10 +952,7 @@
                         </span>
                     </div>
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
-                        ${m.image 
-                            ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` 
-                            : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`
-                        }
+                        ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
                     </div>
                     <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
                     <ul class="space-y-2 mb-6 text-xs text-gray-300">
@@ -1015,7 +970,6 @@
 
     function renderCatalogs() {
         renderAllGrid();
-        
         document.getElementById('accountsGrid').innerHTML = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         document.getElementById('capesGrid').innerHTML = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
         
@@ -1029,10 +983,7 @@
                         </span>
                     </div>
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
-                        ${m.image 
-                            ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` 
-                            : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`
-                        }
+                        ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
                     </div>
                     <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
                     <ul class="space-y-2 mb-6 text-xs text-gray-300">
@@ -1085,7 +1036,7 @@
         updateCartUI();
     }
 
-        function updateCartUI() {
+    function updateCartUI() {
         const count = cart.reduce((sum, i) => sum + i.qty, 0);
         const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
         
@@ -1106,15 +1057,21 @@
             </div>
         `).join('');
 
-        // NEW: Toggle the floating mobile cart bar
         const floatingBar = document.getElementById('floatingCartBar');
         const floatingTotal = document.getElementById('floatingCartTotal');
         
+        const pcCart = document.getElementById('floatingPcCart');
+        const pcCartTotal = document.getElementById('floatingPcCartTotal');
+
         if (cart.length > 0) {
             floatingTotal.textContent = `$${total.toFixed(2)}`;
             floatingBar.classList.remove('translate-y-32');
+
+            pcCartTotal.textContent = `$${total.toFixed(2)}`;
+            pcCart.classList.remove('translate-y-32', 'opacity-0');
         } else {
             floatingBar.classList.add('translate-y-32');
+            pcCart.classList.add('translate-y-32', 'opacity-0');
         }
     }
 
@@ -1138,7 +1095,6 @@
 
     function submitOrder() {
         if (cart.length === 0) return; 
-        
         playSfx('fanfare'); 
         
         let text = `🛒 *New Order Request*\n\n`;
@@ -1184,19 +1140,21 @@
     }
 
     window.onload = () => { setTheme('modern'); switchTab('all'); };
-          // Automatically update the copyright year
+    
+    // Automatically update the copyright year
     document.getElementById('current-year').textContent = new Date().getFullYear();
-          // Disable Right Click
+    
+    // Disable Right Click
     document.addEventListener('contextmenu', event => event.preventDefault());
 
-       // Disable F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U, and Ctrl+S
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U, and Ctrl+S
     document.onkeydown = function(e) {
-        if (e.keyCode == 123) { return false; } // F12
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // Ctrl+Shift+I
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // Ctrl+Shift+C
-        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U (View Source)
-        if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { return false; } // Ctrl+S (Save Page)
+        if (e.keyCode == 123) { return false; }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
+        if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { return false; }
     };
-</script>
+  </script>
 </body>
 </html>
