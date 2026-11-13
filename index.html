@@ -774,7 +774,7 @@
         </button>
     </div>
 
-  <script>
+<script>
     // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
     let audioEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -889,8 +889,18 @@
             { id: 'm-11', title: "NeverHyebn Cyan Blue Pack", size: '191 KB', file: 'NeverHyebn Cyan Blue Pack.zip', boughtCount: 5, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NvrCyan.jpg' },
             { id: 'm-12', title: "NeverHyebn Dark Version 2", size: '191 KB', file: 'NeverHyebn Dark Version_2.zip', boughtCount: 1, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NvrBlack.jpg' },
             { id: 'm-13', title: "Yamii Secret Pack", size: '4.7MB', file: 'Yamii Secret Pack.zip', boughtCount: 1, features: ['Made by Yamii', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'yamii.jpg' },
-            { id: 'm-14', title: "IQspearcomboflame", size: '3.6MB', file: '§d§l ! IQspearcomboflame.zip', boughtCount: 1, features: ['IQ PACK', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'IQ.jpg' }
+            { id: 'm-14', title: "IQspearcomboflame", size: '3.6MB', file: '§d§l ! IQspearcomboflame.zip', boughtCount: 1, features: ['IQ PACK', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'IQ.jpg' },
             
+            // --- TXN PREMIUM PACKS (SOLD VIA TELEGRAM) ---
+            { id: 'm-txn-1', title: "TXN Crimson Red Pack", size: '2.4 MB', file: 'TXN crimson red Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Crimred.jpg', price: 1.00, botCommand: 'CRIMSON' },
+            { id: 'm-txn-2', title: "TXN Cyan Blue Pack", size: '34 MB', file: 'Txn Cyan Blue.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Cyan.jpg', price: 1.00, botCommand: 'CYAN' },
+            { id: 'm-txn-3', title: "TXN Dark Pack", size: '41 MB', file: 'TXN Dark Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Dark.jpg', price: 1.00, botCommand: 'DARK' },
+            { id: 'm-txn-4', title: "TXN Grey Glitch v1 Pack", size: '10 MB', file: 'TXN Grey Glitch v1 Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'glitch1.jpg', price: 1.00, botCommand: 'GLITCH1' },
+            { id: 'm-txn-5', title: "TXN Grey Glitch V2 Pack", size: '10 MB', file: 'TXN Grey Glitch V2 Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'glitch2.jpg', price: 1.00, botCommand: 'GLITCH2' },
+            { id: 'm-txn-6', title: "TXN Kryptonite Pack", size: '30 MB', file: 'TXN Kryptonite Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'kryp.jpg', price: 1.00, botCommand: 'KRYPTONITE' },
+            { id: 'm-txn-7', title: "TXN Orange Pack", size: '13 MB', file: 'TXN Orange Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'orange.jpg', price: 1.00, botCommand: 'ORANGE' },
+            { id: 'm-txn-8', title: "TXN Prismatic Pack", size: '14 MB', file: 'TXN Prismatic Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'pris.jpg', price: 1.00, botCommand: 'PRISMATIC' },
+            { id: 'm-txn-9', title: "TXN Silver Pack", size: '28 MB', file: 'TXN Silver Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'silver.jpg', price: 1.00, botCommand: 'SILVER' }
         ]
     };
 
@@ -969,10 +979,11 @@
             <div class="app-card p-6 flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between gap-2 mb-3">
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">⚡ ${m.boughtCount}+ Downloads</span>
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1">
-                            <i class="fas fa-save text-[8px]"></i> ${m.size}
-                        </span>
+                        ${m.price ? 
+                            `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-mcGold/20 text-mcGold flex items-center gap-1"><i class="fas fa-tag text-[8px]"></i> $${m.price.toFixed(2)}</span>` 
+                            : 
+                            `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1"><i class="fas fa-save text-[8px]"></i> ${m.size}</span>`
+                        }
                     </div>
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
                         ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
@@ -982,9 +993,15 @@
                         ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
                     </ul>
                 </div>
-                <a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                    <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
-                </a>
+                ${m.price ? 
+                    `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
+                        <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
+                    </button>` 
+                    : 
+                    `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                        <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
+                    </a>`
+                }
             </div>
         `).join('');
         
@@ -1000,10 +1017,11 @@
             <div class="app-card p-6 flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between gap-2 mb-3">
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">⚡ ${m.boughtCount}+ Downloads</span>
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1">
-                            <i class="fas fa-save text-[8px]"></i> ${m.size}
-                        </span>
+                        ${m.price ? 
+                            `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-mcGold/20 text-mcGold flex items-center gap-1"><i class="fas fa-tag text-[8px]"></i> $${m.price.toFixed(2)}</span>` 
+                            : 
+                            `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1"><i class="fas fa-save text-[8px]"></i> ${m.size}</span>`
+                        }
                     </div>
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
                         ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
@@ -1013,9 +1031,15 @@
                         ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
                     </ul>
                 </div>
-                <a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                    <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
-                </a>
+                ${m.price ? 
+                    `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
+                        <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
+                    </button>` 
+                    : 
+                    `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                        <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
+                    </a>`
+                }
             </div>
         `).join('');
     }
@@ -1100,6 +1124,16 @@
             floatingBar.classList.add('translate-y-32');
             pcCart.classList.add('translate-y-32', 'opacity-0');
         }
+    }
+
+    function buyPackTelegram(title, price, commandStr) {
+        playSfx('addCart'); 
+        
+        // If a specific bot command is provided, use it. Otherwise, use the title.
+        const cleanTitle = commandStr ? commandStr : title.replace(' Code', '');
+        const command = `/buy ${cleanTitle}`;
+        
+        window.open(`https://t.me/Sok_Assistant_Bot?text=${encodeURIComponent(command)}`, '_blank');
     }
 
     function buyNowTelegram(title, price) {
