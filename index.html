@@ -774,7 +774,7 @@
         </button>
     </div>
 
-   <script>
+  <script>
     // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
     let audioEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1019,6 +1019,10 @@
 
     function switchTab(tabId) {
         playSfx('tab');
+        
+        // Update the URL hash (e.g., #accounts, #capes)
+        window.location.hash = (tabId === 'misc') ? 'packs' : tabId;
+
         document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
         const target = document.getElementById(`view-${tabId}`);
         if (target) target.classList.remove('hidden');
@@ -1159,7 +1163,20 @@
         showToast("Theme code inspector opened (Mockup)");
     }
 
-    window.onload = () => { setTheme('modern'); switchTab('all'); };
+    // Check the URL hash on load to open the correct tab automatically
+    window.onload = () => { 
+        setTheme('modern'); 
+        
+        const hash = window.location.hash.replace('#', ''); 
+        
+        if (['accounts', 'capes', 'media', 'contact', 'misc'].includes(hash)) {
+            switchTab(hash);
+        } else if (hash === 'packs') {
+            switchTab('misc');
+        } else {
+            switchTab('all');
+        }
+    };
     
     // Automatically update the copyright year
     document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -1175,6 +1192,6 @@
         if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
         if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { return false; }
     };
-  </script>
+</script>
 </body>
 </html>
