@@ -746,6 +746,20 @@
             </button>
         </div>
     </div>
+        <!-- PACK PREVIEW MODAL -->
+    <div id="packPreviewModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 hidden backdrop-blur-sm">
+        <div class="app-card w-full max-w-4xl p-4 sm:p-6 relative rounded-2xl flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-mcGold font-bold text-lg" id="previewModalTitle">Pack Preview</h3>
+                <button onclick="closePreviewModal()" class="text-gray-400 hover:text-white text-2xl p-1"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="w-full aspect-video bg-black rounded-xl overflow-hidden flex items-center justify-center relative">
+                <!-- The video or image will be injected here -->
+                <div id="previewModalContent" class="w-full h-full"></div>
+            </div>
+        </div>
+    </div>
 
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 border border-emerald-500 px-6 py-3 rounded-xl text-white text-xs font-semibold"></div>
         <!-- FLOATING MOBILE CART CHECKOUT -->
@@ -779,24 +793,18 @@
     let audioEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-    // 👇 THIS UNLOCKS AUDIO ON MOBILE PHONES 👇
     function unlockAudio() {
         if (audioCtx.state === 'suspended') {
-            audioCtx.resume().then(() => {
-                console.log("Audio unlocked for mobile!");
-            });
+            audioCtx.resume();
         }
     }
-    // Listen for the first tap/click anywhere on the screen
     document.addEventListener('touchstart', unlockAudio, { once: true });
     document.addEventListener('click', unlockAudio, { once: true });
 
     function playSfx(type) {
         if (!audioEnabled) return;
         try {
-            // Double check it's awake before playing
             if (audioCtx.state === 'suspended') audioCtx.resume(); 
-            
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.connect(gain);
@@ -852,9 +860,7 @@
     }
 
     function toggleAudio() {
-        // Unlock audio when the button is clicked (just in case)
         unlockAudio(); 
-        
         audioEnabled = !audioEnabled;
         const btnDesktop = document.getElementById('soundBtnDesktop');
         const btnMobile = document.getElementById('soundBtnMobile');
@@ -894,40 +900,43 @@
             { id: 'cape-6', title: 'Purple Heart Cape Code', price: 9.99, origPrice: 12.99, discount: '-67% OFF', stock: 5, boughtCount: 10, rating: '4.9/5 (340)', badge: null, image: 'Purple.png', fallback: 'https://placehold.co/300x180/111827/f59e0b?text=Copper+Cape', features: ['Java & Bedrock Redeem'] }
         ],
         misc: [
-            { id: 'm-1', title: "Kbez PVP PACK 16x", size: '6.1 MB', file: 'Kbez PVP Pack 16x.zip', boughtCount: 100, features: ['FPS Boost', 'Optimized PvP'] },
-            { id: 'm-2', title: "Kbez Mace PVP Pack 16x", size: '7.1 MB', file: 'Kbez MacePVP Pack 16x .zip', boughtCount: 100, features: ['Mace Textures', 'High FPS'] },
-            { id: 'm-3', title: "Metaanie PVP Pack", size: '20.1 MB', file: 'MetaaniePacks_Metaanie_Vanilla_PACK.zip', boughtCount: 500, features: ['Custom Sky', 'High Definition'] },
-            { id: 'm-4', title: "Cat Durability Pack", size: '5.0 MB', file: 'Durability Pack by Cat.zip', boughtCount: 300, features: ['Item Durability', 'Clean HUD'] },
-            { id: 'm-5', title: "TheoBald's 1.3 Practice Map", size: '16.2 MB', file: 'Theobalds PVP Practice 1.3.zip', boughtCount: 1020, features: ['PvP World', 'Java Edition'] },
-            { id: 'm-6', title: "MinecraftMCPE Android App (APK)", size: '25.0 MB', file: 'https://www.goldeniq.xyz/MinecraftApk', boughtCount: 1500, features: ['Android Only', 'Easy Install'], isExternal: true, image: 'andriod.jpg' },
-            { id: 'm-7', title: "OhmyChocolatexzz Pack", size: '3.6 MB', file: 'OhmyChococlatexzz!.zip', boughtCount: 2, features: ['OhmyChocolate Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Ohmycho.png' },
-            { id: 'm-8', title: "Vanilla Bloodflame (Tibo)", size: '378 KB', file: 'Vanilla Bloodflame.zip', boughtCount: 2, features: ['Tibo Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'tibo.png' },
-            { id: 'm-9', title: "NeverHyebn Pink Pack", size: '195 KB', file: 'NeverHyebn Pink Pack.zip', boughtCount: 10, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NverPink.jpg' },
-            { id: 'm-10', title: "NeverHyebn Green Pack", size: '143 KB', file: 'NeverHyebn Green Pack.zip', boughtCount: 15, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NvrGreen.jpg' },
-            { id: 'm-11', title: "NeverHyebn Cyan Blue Pack", size: '191 KB', file: 'NeverHyebn Cyan Blue Pack.zip', boughtCount: 5, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NvrCyan.jpg' },
-            { id: 'm-12', title: "NeverHyebn Dark Version 2", size: '191 KB', file: 'NeverHyebn Dark Version_2.zip', boughtCount: 1, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NvrBlack.jpg' },
-            { id: 'm-13', title: "Yamii Secret Pack", size: '4.7 MB', file: 'Yamii Secret Pack.zip', boughtCount: 1, features: ['Made by Yamii', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'yamii.jpg' },
-            { id: 'm-14', title: "IQspearcomboflame", size: '3.6 MB', file: '§d§l ! IQspearcomboflame.zip', boughtCount: 1, features: ['IQ PACK', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'IQ.jpg' },
-            { id: 'm-15', title: "Kop sliver pack v1", size: '2.4 MB', file: 'Kop sliver pack v1.zip', boughtCount: 1, features: ['Made by Kop', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'kop.jpg' },
-            { id: 'm-16', title: "ZooAzure Ultra", size: '1.2 MB', file: 'ZooAzure ultra .zip', boughtCount: 1, features: ['Made by Zyy', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'zoo.jpg' },
+            // --- FREE / OTHER PACKS ---
+            { id: 'm-1', title: "Kbez PVP PACK 16x", size: '6.1 MB', file: 'Kbez PVP Pack 16x.zip', boughtCount: 100, features: ['FPS Boost', 'Optimized PvP'], preview: '' },
+            { id: 'm-2', title: "Kbez Mace PVP Pack 16x", size: '7.1 MB', file: 'Kbez MacePVP Pack 16x .zip', boughtCount: 100, features: ['Mace Textures', 'High FPS'], preview: '' },
+            { id: 'm-3', title: "Metaanie PVP Pack", size: '20.1 MB', file: 'MetaaniePacks_Metaanie_Vanilla_PACK.zip', boughtCount: 500, features: ['Custom Sky', 'High Definition'], preview: '' },
+            { id: 'm-4', title: "Cat Durability Pack", size: '5.0 MB', file: 'Durability Pack by Cat.zip', boughtCount: 300, features: ['Item Durability', 'Clean HUD'], preview: '' },
+            { id: 'm-5', title: "TheoBald's 1.3 Practice Map", size: '16.2 MB', file: 'Theobalds PVP Practice 1.3.zip', boughtCount: 1020, features: ['PvP World', 'Java Edition'], preview: '' },
+            { id: 'm-6', title: "MinecraftMCPE Android App (APK)", size: '25.0 MB', file: 'https://www.goldeniq.xyz/MinecraftApk', boughtCount: 1500, features: ['Android Only', 'Easy Install'], isExternal: true, image: 'andriod.jpg', preview: '' },
+            { id: 'm-7', title: "OhmyChocolatexzz Pack", size: '3.6 MB', file: 'OhmyChococlatexzz!.zip', boughtCount: 2, features: ['OhmyChocolate Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Ohmycho.png', preview: '' },
+            { id: 'm-8', title: "Vanilla Bloodflame (Tibo)", size: '378 KB', file: 'Vanilla Bloodflame.zip', boughtCount: 2, features: ['Tibo Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'tibo.png', preview: '' },
+            { id: 'm-9', title: "NeverHyebn Pink Pack", size: '195 KB', file: 'NeverHyebn Pink Pack.zip', boughtCount: 10, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NverPink.jpg', preview: '' },
+            { id: 'm-10', title: "NeverHyebn Green Pack", size: '143 KB', file: 'NeverHyebn Green Pack.zip', boughtCount: 15, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NvrGreen.jpg', preview: '' },
+            { id: 'm-11', title: "NeverHyebn Cyan Blue Pack", size: '191 KB', file: 'NeverHyebn Cyan Blue Pack.zip', boughtCount: 5, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NvrCyan.jpg', preview: '' },
+            { id: 'm-12', title: "NeverHyebn Dark Version 2", size: '191 KB', file: 'NeverHyebn Dark Version_2.zip', boughtCount: 1, features: ['Made by NeverHyebn', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'NvrBlack.jpg', preview: '' },
+            { id: 'm-13', title: "Yamii Secret Pack", size: '4.7 MB', file: 'Yamii Secret Pack.zip', boughtCount: 1, features: ['Made by Yamii', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'yamii.jpg', preview: '' },
+            { id: 'm-14', title: "IQspearcomboflame", size: '3.6 MB', file: '§d§l ! IQspearcomboflame.zip', boughtCount: 1, features: ['IQ PACK', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'IQ.jpg', preview: '' },
+            { id: 'm-15', title: "Kop sliver pack v1", size: '2.4 MB', file: 'Kop sliver pack v1.zip', boughtCount: 1, features: ['Made by Kop', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'kop.jpg', preview: '' },
+            { id: 'm-16', title: "ZooAzure Ultra", size: '1.2 MB', file: 'ZooAzure ultra .zip', boughtCount: 1, features: ['Made by Zyy', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'zoo.jpg', preview: '' },
+            { id: 'm-17', title: "PigWhite Pack", size: '1.2 MB', file: 'PigWhite.zip', boughtCount: 1, features: ['Made by PigWhite', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'pig.jpg', preview: 'merpack.mp4' },
             
             // --- TXN PREMIUM PACKS (SOLD VIA TELEGRAM) ---
-            { id: 'm-txn-1', title: "TXN Crimson Red Pack", size: '2.4 MB', file: 'TXN crimson red Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Crimred.jpg', price: 1.00, botCommand: 'CRIMSON' },
-            { id: 'm-txn-2', title: "TXN Cyan Blue Pack", size: '34 MB', file: 'Txn Cyan Blue.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Cyan.jpg', price: 1.00, botCommand: 'CYAN' },
-            { id: 'm-txn-3', title: "TXN Dark Pack", size: '41 MB', file: 'TXN Dark Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Dark.jpg', price: 1.00, botCommand: 'DARK1' },
-            { id: 'm-txn-4', title: "TXN Grey Glitch v1 Pack", size: '10 MB', file: 'TXN Grey Glitch v1 Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'glitch1.jpg', price: 1.00, botCommand: 'GLITCH1' },
-            { id: 'm-txn-5', title: "TXN Grey Glitch V2 Pack", size: '10 MB', file: 'TXN Grey Glitch V2 Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'glitch2.jpg', price: 1.00, botCommand: 'GLITCH2' },
-            { id: 'm-txn-6', title: "TXN Kryptonite Pack", size: '30 MB', file: 'TXN Kryptonite Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'kryp.jpg', price: 1.00, botCommand: 'KRYPTONITE' },
-            { id: 'm-txn-7', title: "TXN Orange Pack", size: '13 MB', file: 'TXN Orange Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'orange.jpg', price: 1.00, botCommand: 'ORANGE' },
-            { id: 'm-txn-8', title: "TXN Prismatic Pack", size: '14 MB', file: 'TXN Prismatic Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'pris.jpg', price: 1.00, botCommand: 'PRISMATIC' },
-            { id: 'm-txn-9', title: "TXN Silver Pack", size: '28 MB', file: 'TXN Silver Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'silver.jpg', price: 1.00, botCommand: 'SILVER' },
-            { id: 'm-txn-10', title: "TXN Dark Pack", size: '7.6 MB', file: 'TXN_Dark_Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: '.jpg', price: 2.00, botCommand: 'DARK2' },
-            { id: 'm-txn-11', title: "TXN Void Pack", size: '24 MB', file: 'TXN  Void Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'voidpack.jpg', price: 2.00, botCommand: 'VOID' },
-            { id: 'm-txn-12', title: "TXN Lightning Blue Pack.zip", size: '41 MB', file: 'TXN lightning blue pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'lightning.jpg', price: 2.00, botCommand: 'LIGHTNING_BLUE' },
-            { id: 'm-txn-13', title: "TXN White Pack", size: '28 MB', file: 'TXN_White_Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: '.jpg', price: 2.00, botCommand: 'WHITE' },
-            { id: 'm-txn-14', title: "TXN Snow Pack", size: '28 MB', file: 'TXN_Snow_Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'snow.jpg', price: 2.00, botCommand: 'SNOW' },
-            { id: 'm-txn-15', title: "TXN White Lunar Pack", size: '28 MB', file: 'TXN White Lunar Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'whitelunar.jpg', price: 2.00, botCommand: 'WHITE_LUNAR' },
-            { id: 'm-txn-16', title: "TXN Grey Pack", size: '28 MB', file: 'TXN_Grey_Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'greypack.jpg', price: 2.00, botCommand: 'GREY' }
+            { id: 'm-txn-1', title: "TXN Crimson Red Pack", size: '2.4 MB', file: 'TXN crimson red Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Crimred.jpg', price: 1.00, botCommand: 'CRIMSON', preview: '' },
+            { id: 'm-txn-2', title: "TXN Cyan Blue Pack", size: '34 MB', file: 'Txn Cyan Blue.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Cyan.jpg', price: 1.00, botCommand: 'CYAN', preview: '' },
+            { id: 'm-txn-3', title: "TXN Dark Pack", size: '41 MB', file: 'TXN Dark Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'Dark.jpg', price: 1.00, botCommand: 'DARK1', preview: '' },
+            { id: 'm-txn-4', title: "TXN Grey Glitch v1 Pack", size: '10 MB', file: 'TXN Grey Glitch v1 Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'glitch1.jpg', price: 1.00, botCommand: 'GLITCH1', preview: '' },
+            { id: 'm-txn-5', title: "TXN Grey Glitch V2 Pack", size: '10 MB', file: 'TXN Grey Glitch V2 Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'glitch2.jpg', price: 1.00, botCommand: 'GLITCH2', preview: '' },
+            { id: 'm-txn-6', title: "TXN Kryptonite Pack", size: '30 MB', file: 'TXN Kryptonite Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'kryp.jpg', price: 1.00, botCommand: 'KRYPTONITE', preview: '' },
+            { id: 'm-txn-7', title: "TXN Orange Pack", size: '13 MB', file: 'TXN Orange Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'orange.jpg', price: 1.00, botCommand: 'ORANGE', preview: '' },
+            { id: 'm-txn-8', title: "TXN Prismatic Pack", size: '14 MB', file: 'TXN Prismatic Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'pris.jpg', price: 1.00, botCommand: 'PRISMATIC', preview: '' },
+            { id: 'm-txn-9', title: "TXN Silver Pack", size: '28 MB', file: 'TXN Silver Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'silver.jpg', price: 1.00, botCommand: 'SILVER', preview: '' },
+            { id: 'm-txn-10', title: "TXN Dark Pack", size: '7.6 MB', file: 'TXN_Dark_Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: '.jpg', price: 1.00, botCommand: 'DARK2', preview: '' },
+            { id: 'm-txn-11', title: "TXN Void Pack", size: '24 MB', file: 'TXN  Void Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'voidpack.jpg', price: 2.00, botCommand: 'VOID', preview: '' },
+            { id: 'm-txn-12', title: "TXN Lightning Blue Pack.zip", size: '41 MB', file: 'TXN lightning blue pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'lightning.jpg', price: .00, botCommand: 'LIGHTNING_BLUE', preview: '' },
+            { id: 'm-txn-13', title: "TXN White Pack", size: '28 MB', file: 'TXN_White_Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: '.jpg', price: 1.00, botCommand: 'WHITE', preview: '' },
+            { id: 'm-txn-14', title: "TXN Snow Pack", size: '28 MB', file: 'TXN_Snow_Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'snow.jpg', price: 2.00, botCommand: 'SNOW', preview: '' },
+            { id: 'm-txn-15', title: "TXN White Lunar Pack", size: '28 MB', file: 'TXN White Lunar Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image:   'whitelunar.jpg', price: 2.00, botCommand: 'WHITE_LUNAR', preview: '' },
+            { id: 'm-txn-16', title: "TXN Grey Pack", size: '28 MB', file: 'TXN_Grey_Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'greypack.jpg', price: 2.00, botCommand: 'GREY', preview: '' },
+            { id: 'm-txn-17', title: "TXN Green Glitch Pack", size: '28 MB', file: 'TXN Green Glitch Pack.zip', boughtCount: 1, features: ['TXN Pack', 'PvP Pack', 'Specialized Weapon', 'Java Edition'], isExternal: true, image: 'greenglitch.jpg', price: 3.00, botCommand: 'GREEN_GLITCH', preview: '' }
         ]
     };
 
@@ -998,7 +1007,7 @@
         `;
     }
 
-    function renderAllGrid() {
+       function renderAllGrid() {
         const accountCards = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         const capeCards = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
         
@@ -1012,30 +1021,54 @@
                             `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1"><i class="fas fa-save text-[8px]"></i> ${m.size}</span>`
                         }
                     </div>
-                    <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
-                        ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
+                    
+                    <!-- IMAGE / PREVIEW CONTAINER -->
+                    <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden relative group touch-manipulation">
+                        ${m.preview ? `
+                            <div id="preview-container-${m.id}" class="w-full h-full flex items-center justify-center relative cursor-pointer" onclick="playInlinePreview('${m.id}', '${m.preview}')">
+                                <img id="preview-img-${m.id}" src="${m.image || 'https://placehold.co/300x180/111827/f59e0b?text=Preview'}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                                    <div class="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-play ml-1 text-lg"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : `
+                            ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
+                        `}
                     </div>
+
                     <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
                     <ul class="space-y-2 mb-6 text-xs text-gray-300">
                         ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
                     </ul>
                 </div>
-                ${m.price ? 
-                    `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
-                        <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
-                    </button>` 
-                    : 
-                    `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                        <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
-                    </a>`
-                }
+                
+                                <!-- BUTTONS CONTAINER -->
+                <div class="flex flex-col gap-2">
+                    ${m.price ? 
+                        `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
+                            <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
+                        </button>` 
+                        : 
+                        `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                            <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
+                        </a>`
+                    }
+                    ${m.preview ? 
+                        `<button onclick="openPreviewModal('${m.title}', '${m.preview}')" class="w-full py-2.5 text-xs font-bold rounded-xl border border-gray-500 text-gray-300 hover:bg-white/10 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-eye"></i> PREVIEW PACK
+                        </button>` 
+                        : ''
+                    }
+                </div>
             </div>
         `).join('');
         
         document.getElementById('allGrid').innerHTML = accountCards + capeCards + miscCards;
     }
 
-    function renderCatalogs() {
+       function renderCatalogs() {
         renderAllGrid();
         document.getElementById('accountsGrid').innerHTML = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         document.getElementById('capesGrid').innerHTML = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
@@ -1050,31 +1083,161 @@
                             `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1"><i class="fas fa-save text-[8px]"></i> ${m.size}</span>`
                         }
                     </div>
-                    <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden">
-                        ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
+                    
+                    <!-- IMAGE / PREVIEW CONTAINER -->
+                    <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden relative group touch-manipulation">
+                        ${m.preview ? `
+                            <div id="preview-container-${m.id}" class="w-full h-full flex items-center justify-center relative cursor-pointer" onclick="playInlinePreview('${m.id}', '${m.preview}')">
+                                <img id="preview-img-${m.id}" src="${m.image || 'https://placehold.co/300x180/111827/f59e0b?text=Preview'}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                                    <div class="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-play ml-1 text-lg"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : `
+                            ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
+                        `}
                     </div>
+
                     <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
                     <ul class="space-y-2 mb-6 text-xs text-gray-300">
                         ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
                     </ul>
                 </div>
-                ${m.price ? 
-                    `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
-                        <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
-                    </button>` 
-                    : 
-                    `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                        <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
-                    </a>`
-                }
+                
+                                <!-- BUTTONS CONTAINER -->
+                <div class="flex flex-col gap-2">
+                    ${m.price ? 
+                        `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
+                            <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
+                        </button>` 
+                        : 
+                        `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                            <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
+                        </a>`
+                    }
+                    ${m.preview ? 
+                        `<button onclick="openPreviewModal('${m.title}', '${m.preview}')" class="w-full py-2.5 text-xs font-bold rounded-xl border border-gray-500 text-gray-300 hover:bg-white/10 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-eye"></i> PREVIEW PACK
+                        </button>` 
+                        : ''
+                    }
+                </div>
             </div>
         `).join('');
+    }
+    // Play preview directly inside the card
+         function playInlinePreview(id, previewUrl) {
+        playSfx('click');
+        const container = document.getElementById(`preview-container-${id}`);
+        
+        if (container.querySelector('video') || container.querySelector('iframe')) return;
+
+        let mediaHTML = '';
+        
+        if (previewUrl.includes('youtube.com') || previewUrl.includes('youtu.be') || previewUrl.includes('vimeo.com')) {
+            let embedUrl = '';
+            let videoId = '';
+
+            if (previewUrl.includes('youtu.be/')) {
+                videoId = previewUrl.split('youtu.be/')[1].split(/[?&]/)[0];
+            } else if (previewUrl.includes('watch?v=')) {
+                videoId = previewUrl.split('watch?v=')[1].split('&')[0];
+            }
+
+            if (videoId) {
+                embedUrl = 'https://www.youtube.com/embed/' + videoId;
+            } else {
+                embedUrl = previewUrl; 
+            }
+            
+           mediaHTML = `<iframe src="${embedUrl}?autoplay=1" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+        } else if (previewUrl.endsWith('.mp4') || previewUrl.endsWith('.webm')) {
+            mediaHTML = `<video src="${previewUrl}" autoplay controls class="w-full h-full object-contain"></video>`;
+        } else {
+            mediaHTML = `<img src="${previewUrl}" class="w-full h-full object-contain">`;
+        }
+
+        // 👇 THIS IS WHAT WAS MISSING! 👇
+        // This actually puts the video into the card on the screen
+        container.innerHTML = `
+            <button onclick="closeInlinePreview('${id}', '${previewUrl}')" class="absolute top-2 right-2 z-10 bg-black/80 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-500 transition">
+                <i class="fas fa-times text-xs"></i>
+            </button>
+            ${mediaHTML}
+        `;
+    }
+        // Open the big preview modal
+    function openPreviewModal(title, previewUrl) {
+        playSfx('click');
+        document.getElementById('previewModalTitle').textContent = title + " Preview";
+        
+        let mediaHTML = '';
+        
+        if (previewUrl.includes('youtube.com') || previewUrl.includes('youtu.be') || previewUrl.includes('vimeo.com')) {
+            let embedUrl = '';
+            let videoId = '';
+
+            if (previewUrl.includes('youtu.be/')) {
+                videoId = previewUrl.split('youtu.be/')[1].split(/[?&]/)[0];
+            } else if (previewUrl.includes('watch?v=')) {
+                videoId = previewUrl.split('watch?v=')[1].split('&')[0];
+            }
+
+            if (videoId) {
+                embedUrl = 'https://www.youtube.com/embed/' + videoId;
+            } else {
+                embedUrl = previewUrl; 
+            }
+            
+            mediaHTML = `<iframe src="${embedUrl}?autoplay=1" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+        } else if (previewUrl.endsWith('.mp4') || previewUrl.endsWith('.webm')) {
+            mediaHTML = `<video src="${previewUrl}" autoplay controls class="w-full h-full object-contain"></video>`;
+        } else {
+            mediaHTML = `<img src="${previewUrl}" class="w-full h-full object-contain">`;
+        }
+
+        document.getElementById('previewModalContent').innerHTML = mediaHTML;
+        document.getElementById('packPreviewModal').classList.remove('hidden');
+    }
+
+    // Close the preview modal
+    function closePreviewModal() {
+        playSfx('remove');
+        document.getElementById('packPreviewModal').classList.add('hidden');
+        document.getElementById('previewModalContent').innerHTML = ''; // Stops the video from playing in the background
+    }
+
+    // Close the preview and go back to the image
+    function closeInlinePreview(id, previewUrl) {
+        playSfx('remove');
+        const container = document.getElementById(`preview-container-${id}`);
+        
+        const iframe = container.querySelector('iframe');
+        const video = container.querySelector('video');
+        if (iframe) iframe.src = '';
+        if (video) video.pause();
+
+        container.innerHTML = `
+            <img id="preview-img-${id}" src="" alt="" class="h-full object-contain">
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div class="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                    <i class="fas fa-play ml-1 text-lg"></i>
+                </div>
+            </div>
+        `;
+        
+        const product = productsData.misc.find(p => p.id === id);
+        container.querySelector('img').src = product.image || 'https://placehold.co/300x180/111827/f59e0b?text=Preview';
+        container.querySelector('img').onerror = function() { this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'; };
+        
+        container.onclick = () => playInlinePreview(id, previewUrl);
     }
 
     function switchTab(tabId) {
         playSfx('tab');
         
-        // Update the URL hash (e.g., #accounts, #capes)
         window.location.hash = (tabId === 'misc') ? 'packs' : tabId;
 
         document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
@@ -1155,11 +1318,8 @@
 
     function buyPackTelegram(title, price, commandStr) {
         playSfx('addCart'); 
-        
-        // If a specific bot command is provided, use it. Otherwise, use the title.
         const cleanTitle = commandStr ? commandStr : title.replace(' Code', '');
         const command = `/buy ${cleanTitle}`;
-        
         window.open(`https://t.me/Sok_Assistant_Bot?text=${encodeURIComponent(command)}`, '_blank');
     }
 
@@ -1227,7 +1387,6 @@
         showToast("Theme code inspector opened (Mockup)");
     }
 
-    // Check the URL hash on load to open the correct tab automatically
     window.onload = () => { 
         setTheme('modern'); 
         
@@ -1242,13 +1401,10 @@
         }
     };
     
-    // Automatically update the copyright year
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
-    // Disable Right Click
     document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U, and Ctrl+S
     document.onkeydown = function(e) {
         if (e.keyCode == 123) { return false; }
         if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
