@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kbez MC Shop - Minecraft Account Shop</title>
-        <!-- Telegram / Social Media Preview Tags -->
+    <!-- Telegram / Social Media Preview Tags -->
     <meta property="og:title" content="Kbez MC Shop - Official Website">
     <meta property="og:description" content="មើល Account និងចុចទិញបានភ្លាមៗ! Full Access Java & Bedrock. 100% Safe & Trusted.">
     <meta property="og:url" content="https://www.sokmc.com/">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.sokmc.com/preview.jpg">
-    
     <!-- Discord / Standard Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kbez MC Shop - Official Website">
@@ -440,276 +439,281 @@
             </div>
         </div>
     </header>
-                  <!-- THE FIX IS HERE: Added order-3 md:order-none -->
-                <div class="relative w-full md:w-72 order-3 md:order-none">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                        <i class="fas fa-search"></i>
-                    </span>
-                    <input type="text" id="globalSearch" oninput="handleSearch(this.value)" placeholder="Search accounts, capes, resource packs..." class="w-full pl-9 pr-4 py-2 bg-black/50 border border-white/15 rounded-xl text-sm text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 font-sans transition">
-                </div>
 
-                <div id="navLinksContainer" class="hidden md:flex items-center gap-1 flex-wrap justify-center font-sans text-xs font-semibold">
-                    <button onclick="switchTab('all')" data-tab="all" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">All</button>
-                    <button onclick="switchTab('accounts')" data-tab="accounts" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Accounts</button>
-                    <button onclick="switchTab('capes')" data-tab="capes" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Capes</button>
-                    <button onclick="switchTab('misc')" data-tab="misc" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Packs</button>
-                    <button onclick="switchTab('media')" data-tab="media" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Media</button>
-                    <button onclick="switchTab('contact')" data-tab="contact" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Support & FAQ</button>
-                </div>
+    <!-- ================= PROPER NAV BAR (FIXED STRUCTURE) ================= -->
+    <nav class="bg-black/90 border-b border-gray-800 sticky top-[57px] z-40 px-4 py-3 shadow-lg backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
 
-                <div class="hidden md:flex items-center gap-3">
-                    <button onclick="toggleAudio()" id="soundBtnDesktop" class="px-3 py-2 bg-black/60 border border-white/10 text-mcGold text-xs rounded-xl hover:bg-white/10 transition flex items-center gap-1.5" title="Toggle Sound SFX Engine">
-                        <i class="fas fa-volume-up text-emerald-400"></i>
-                        <span>SFX: ON</span>
-                    </button>
-                    <button onclick="toggleCart()" class="px-4 py-2 bg-mcGold hover:bg-yellow-500 text-black font-bold rounded-xl text-xs flex items-center gap-2 transition shadow-lg shadow-yellow-500/10">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>CART</span>
-                        <span id="desktopCartCount" class="bg-black text-mcGold px-2 py-0.5 rounded ml-1 text-[11px]">0</span>
-                    </button>
-                </div>
-                    <div class="hidden md:flex items-center gap-3">
-                <button onclick="toggleLanguage()" id="langToggleBtn" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-sans text-mcGold flex items-center gap-2 transition font-bold">
+            <!-- Centered Search Bar -->
+            <div class="relative w-full md:w-72 mx-auto md:mx-0 order-1">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </span>
+                <input type="text" id="globalSearch" oninput="handleSearch(this.value)" placeholder="Search accounts, capes, resource packs..." class="w-full pl-9 pr-4 py-2 bg-black/50 border border-white/15 rounded-xl text-sm text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 font-sans transition">
+            </div>
+
+            <!-- Nav Links (Center) -->
+            <div id="navLinksContainer" class="hidden md:flex items-center gap-1 flex-wrap justify-center font-sans text-xs font-semibold order-2">
+                <button onclick="switchTab('all')" data-tab="all" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">All</button>
+                <button onclick="switchTab('accounts')" data-tab="accounts" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Accounts</button>
+                <button onclick="switchTab('capes')" data-tab="capes" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Capes</button>
+                <button onclick="switchTab('misc')" data-tab="misc" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Packs</button>
+                <button onclick="switchTab('media')" data-tab="media" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Media</button>
+                <button onclick="switchTab('contact')" data-tab="contact" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Support & FAQ</button>
+            </div>
+
+            <!-- Controls (Sound, Cart, Language, Mobile View) -->
+            <div class="hidden md:flex items-center gap-2 lg:gap-3 order-3">
+                <button onclick="toggleLanguage()" id="langToggleBtn" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-sans text-mcGold flex items-center gap-2 transition font-bold" title="Switch Language">
                     <i class="fas fa-language"></i> <span id="langText">KH</span>
                 </button>
-                <button onclick="toggleMobileView()" id="mobileViewBtnD" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-sans text-gray-300 flex items-center gap-2 transition">
-                    <i class="fas fa-mobile-alt"></i> <span id="viewModeText">Mobile Frame</span>
+                <button onclick="toggleAudio()" id="soundBtnDesktop" class="px-3 py-2 bg-black/60 border border-white/10 text-mcGold text-xs rounded-xl hover:bg-white/10 transition flex items-center gap-1.5" title="Toggle Sound SFX Engine">
+                    <i class="fas fa-volume-up text-emerald-400"></i>
+                    <span>SFX: ON</span>
+                </button>
+                <button onclick="toggleCart()" class="px-4 py-2 bg-mcGold hover:bg-yellow-500 text-black font-bold rounded-xl text-xs flex items-center gap-2 transition shadow-lg shadow-yellow-500/10">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>CART</span>
+                    <span id="desktopCartCount" class="bg-black text-mcGold px-2 py-0.5 rounded ml-1 text-[11px]">0</span>
                 </button>
             </div>
+
+            <!-- Mobile menu trigger -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 bg-gray-800 rounded text-gray-300 hover:text-white order-2" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-2 pt-4 pb-2 border-t border-white/10 mt-3 font-sans text-xs font-semibold">
+            <button onclick="switchTab('all'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">▦ All</button>
+            <button onclick="switchTab('accounts'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🗡️ Accounts</button>
+            <button onclick="switchTab('capes'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🚩 Capes</button>
+            <button onclick="switchTab('misc'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📦 Packs</button>
+            <button onclick="switchTab('media'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📱 Media</button>
+            <button onclick="switchTab('contact'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">💬 Support & FAQ</button>
+            <button onclick="toggleCart(); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🛒 Cart</button>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-8 py-8 w-full">
+
+        <!-- ALL PRODUCTS VIEW -->
+        <section id="view-all" class="tab-view space-y-8">
+            <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
+                <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">ALL PRODUCTS</h2>
+                <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Browse everything in one place — accounts, capes, resource packs and maps.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="allGrid"></div>
+        </section>
+
+        <!-- ACCOUNTS VIEW -->
+        <section id="view-accounts" class="tab-view space-y-8 hidden">
+            <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">MINECRAFT ACCOUNTS</h2>
+                <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Full Access Java & Bedrock accounts. Verified clean history, instant automated delivery.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="accountsGrid"></div>
+        </section>
+
+        <!-- CAPES VIEW -->
+        <section id="view-capes" class="tab-view space-y-8 hidden">
+            <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
+                <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">MINECRAFT CAPES</h2>
+                <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Official redeemable cape codes for Java & Bedrock. Syncs across all multiplayer servers.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="capesGrid"></div>
+        </section>
+                
+        <!-- MISC VIEW -->
+        <section id="view-misc" class="tab-view space-y-8 hidden">
+            <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
+                <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">RESOURCE PACKS & MAPS</h2>
+                <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">High performance PvP texture packs and practice maps ready for immediate download.</p>
             </div>
 
-            <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-2 pt-4 pb-2 border-t border-white/10 mt-3 font-sans text-xs font-semibold">
-                <button onclick="switchTab('all'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">▦ All</button>
-                <button onclick="switchTab('accounts'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🗡️ Accounts</button>
-                <button onclick="switchTab('capes'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🚩 Capes</button>
-                <button onclick="switchTab('misc'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📦 Packs</button>
-                <button onclick="switchTab('media'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📱 Media</button>
-                <button onclick="switchTab('contact'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">💬 Support & FAQ</button>
+            <!-- Sorting Bar -->
+            <div class="flex flex-col sm:flex-row justify-between items-center bg-black/40 p-4 rounded-xl border border-white/10 gap-4">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-filter text-mcGold"></i>
+                    <span class="text-white text-sm font-bold">Filter & Sort:</span>
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <select id="packSortSelect" onchange="sortPacks(this.value)" class="bg-black/60 text-white text-sm rounded-lg px-4 py-2 border border-white/20 focus:outline-none focus:border-mcGold w-full sm:w-auto cursor-pointer font-sans">
+                        <option value="default">Default (All)</option>
+                        <option value="free">Free Packs Only</option>
+                        <option value="paid">Paid Packs Only</option>
+                        <option value="lowest">Price: Lowest to Highest</option>
+                        <option value="highest">Price: Highest to Lowest</option>
+                    </select>
+                </div>
             </div>
-        </nav>
 
-                <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-8 py-8 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="miscGrid"></div>
+        </section>
 
-            <!-- ALL PRODUCTS VIEW -->
-            <section id="view-all" class="tab-view space-y-8">
-                <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
-                    <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">ALL PRODUCTS</h2>
-                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Browse everything in one place — accounts, capes, resource packs and maps.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="allGrid"></div>
-            </section>
-
-            <!-- ACCOUNTS VIEW -->
-            <section id="view-accounts" class="tab-view space-y-8 hidden">
-                <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
-                    <div class="absolute -top-12 -right-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
-                    <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">MINECRAFT ACCOUNTS</h2>
-                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Full Access Java & Bedrock accounts. Verified clean history, instant automated delivery.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="accountsGrid"></div>
-            </section>
-
-            <!-- CAPES VIEW -->
-            <section id="view-capes" class="tab-view space-y-8 hidden">
-                <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
-                    <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">MINECRAFT CAPES</h2>
-                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">Official redeemable cape codes for Java & Bedrock. Syncs across all multiplayer servers.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="capesGrid"></div>
-            </section>
-                    
-                       <!-- MISC VIEW -->
-            <section id="view-misc" class="tab-view space-y-8 hidden">
-                <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
-                    <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">RESOURCE PACKS & MAPS</h2>
-                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">High performance PvP texture packs and practice maps ready for immediate download.</p>
-                </div>
-
-                <!-- 👇 ADD THIS SORTING BAR HERE 👇 -->
-                <div class="flex flex-col sm:flex-row justify-between items-center bg-black/40 p-4 rounded-xl border border-white/10 gap-4">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-filter text-mcGold"></i>
-                        <span class="text-white text-sm font-bold">Filter & Sort:</span>
-                    </div>
-                    <div class="flex gap-2 w-full sm:w-auto">
-                        <select id="packSortSelect" onchange="sortPacks(this.value)" class="bg-black/60 text-white text-sm rounded-lg px-4 py-2 border border-white/20 focus:outline-none focus:border-mcGold w-full sm:w-auto cursor-pointer font-sans">
-                            <option value="default">Default (All)</option>
-                            <option value="free">Free Packs Only</option>
-                            <option value="paid">Paid Packs Only</option>
-                            <option value="lowest">Price: Lowest to Highest</option>
-                            <option value="highest">Price: Highest to Lowest</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="miscGrid"></div>
-            </section>
-
-            <!-- SUPPORT & FAQ VIEW -->
-            <section id="view-contact" class="tab-view space-y-10 hidden">
-                <div class="app-card px-6 py-10 sm:py-12 text-center relative overflow-hidden">
-                    <h2 class="app-header-title text-3xl sm:text-4xl font-bold mb-3 text-mcGold">Contact Us</h2>
-                    <p class="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto">We're here to help 24/7! Choose your preferred way to reach us.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto">
-                    <div class="app-card p-6 sm:p-7 text-center space-y-3">
-                        <div class="text-4xl sm:text-5xl text-mcGold"><i class="fab fa-telegram"></i></div>
-                        <h3 class="app-header-title text-lg font-bold text-white">Telegram</h3>
-                        <div class="text-mcGold font-semibold">@sokb07</div>
-                        <p class="text-gray-300 text-xs">⏱ Response time: 2-10 minutes, or just leave a message for us.</p>
-                        <a href="https://t.me/sokb07" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2">
-                            <i class="fab fa-telegram"></i> Message on Telegram
-                        </a>
-                    </div>
-
-                    <div class="app-card p-6 sm:p-7 text-center space-y-3">
-                        <div class="text-4xl sm:text-5xl text-mcGold"><i class="fab fa-discord"></i></div>
-                        <h3 class="app-header-title text-lg font-bold text-white">Discord</h3>
-                        <div class="text-mcGold font-semibold">MC Shop Support</div>
-                        <p class="text-gray-300 text-xs">⏱ Response time: 5-20 minutes</p>
-                        <a href="https://discord.gg/QzQXF7syUc" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2">
-                            <i class="fab fa-discord"></i> Join Discord
-                        </a>
-                    </div>
-                </div>
-
-                <div class="max-w-2xl mx-auto space-y-3">
-                    <h3 class="app-header-title text-xl sm:text-2xl font-bold text-mcGold text-center mb-5">Frequently Asked Questions</h3>
-
-                    <details class="app-card p-4 sm:p-5 rounded-xl">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
-                            <span><span class="text-pink-400 mr-2">?</span>How long does delivery take?</span>
-                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
-                        </summary>
-                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Delivery takes 5-15 minutes after payment verification. You'll receive the account details via Telegram.</p>
-                    </details>
-
-                    <details class="app-card p-4 sm:p-5 rounded-xl">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
-                            <span><span class="text-pink-400 mr-2">?</span>How can I redeem the codes/cape?</span>
-                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
-                        </summary>
-                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Login to <a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">minecraft.net</a>, go to <a href="https://www.minecraft.net/redeem" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">Minecraft Redeem</a>, and click "Redeem". Then go to your Minecraft Bedrock game to equip the cape and join any server for 5 minutes. Finally, you'll see your cape in <span class="text-cyan-300 underline">View Cape & Skin</span>.</p>
-                    </details>
-
-                    <details class="app-card p-4 sm:p-5 rounded-xl">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
-                            <span><span class="text-pink-400 mr-2">?</span>What payment methods do you accept?</span>
-                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
-                        </summary>
-                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">We accept all Bakong's QR code is provided when u chatted to admin.</p>
-                    </details>
-
-                    <details class="app-card p-4 sm:p-5 rounded-xl">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
-                            <span><span class="text-pink-400 mr-2">?</span>Can I get a refund if the account doesn't work?</span>
-                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
-                        </summary>
-                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">We offer a 7-day replacement guarantee. If the account stops working, we'll replace it for free. No cash refunds.</p>
-                    </details>
-
-                    <details class="app-card p-4 sm:p-5 rounded-xl">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
-                            <span><span class="text-pink-400 mr-2">?</span>How do I change the account password?</span>
-                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
-                        </summary>
-                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Login to <a href="https://account.microsoft.com/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">microsoft.com</a>, go to Account Settings, and click "Change Password". We recommend changing it immediately.</p>
-                    </details>
-
-                    <details class="app-card p-4 sm:p-5 rounded-xl">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
-                            <span><span class="text-pink-400 mr-2">?</span>Do I need to provide anything after payment?</span>
-                            <i class="fas fa-chevron-down text-mcGold text-xs"></i>
-                        </summary>
-                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Just send your payment screenshot on Telegram and we'll deliver your account within minutes.</p>
-                    </details>
-                </div>
-            </section>
-
-                       <!-- MEDIA / SOCIALS VIEW -->
-            <section id="view-media" class="tab-view space-y-10 hidden">
-                <div class="app-card px-6 py-10 sm:py-12 text-center relative overflow-hidden">
-                    <h2 class="app-header-title text-3xl sm:text-4xl font-bold mb-3 text-mcGold">Follow Our Media</h2>
-                    <p class="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto">Stay updated with our latest drops, gameplay, and Minecraft content!</p>
-                </div>
-
-                <!-- Changed to lg:grid-cols-3 so the 3 cards fit perfectly side-by-side -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
-                    
-                    <!-- YouTube Card -->
-                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
-                        <div>
-                            <div class="text-4xl sm:text-5xl text-red-600 group-hover:scale-110 transition-transform mb-3">
-                                <i class="fab fa-youtube"></i>
-                            </div>
-                            <h3 class="app-header-title text-lg font-bold text-white mb-1">YouTube</h3>
-                            <div class="text-mcGold font-semibold mb-2">@KbezMC</div>
-                            <p class="text-gray-300 text-xs mb-4">Watch our latest gameplay and shop showcases.</p>
-                        </div>
-                        <a href="https://www.youtube.com/@KbezMC" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)]">
-                            <i class="fab fa-youtube"></i> Subscribe
-                        </a>
-                    </div>
-
-                    <!-- TikTok Card -->
-                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
-                        <div>
-                            <div class="text-4xl sm:text-5xl text-white group-hover:scale-110 transition-transform mb-3">
-                                <i class="fab fa-tiktok"></i>
-                            </div>
-                            <h3 class="app-header-title text-lg font-bold text-white mb-1">TikTok</h3>
-                            <div class="text-mcGold font-semibold mb-2">@kbez077</div>
-                            <p class="text-gray-300 text-xs mb-4">Short clips, tricks, and daily Minecraft shorts.</p>
-                        </div>
-                        <a href="https://www.tiktok.com/@kbez077" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-black hover:bg-gray-900 border border-white/20 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                            <i class="fab fa-tiktok"></i> Follow
-                        </a>
-                    </div>
-                    
-                    <!-- Telegram Channel Card (Now properly separated) -->
-                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
-                        <div>
-                            <div class="text-4xl sm:text-5xl text-blue-500 group-hover:scale-110 transition-transform mb-3">
-                                <i class="fab fa-telegram"></i>
-                            </div>
-                            <h3 class="app-header-title text-lg font-bold text-white mb-1">Telegram</h3>
-                            <div class="text-mcGold font-semibold mb-2">@sokb_07</div>
-                            <p class="text-gray-300 text-xs mb-4">New Updates, Premium Accounts, Capes & Packs.</p>
-                        </div>
-                        <a href="https://t.me/sokb_07" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-blue-500 hover:bg-blue-400 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-                            <i class="fab fa-telegram"></i> Join Now
-                        </a>
-                    </div>
-
-                </div>
-            </section>
-        </main>
-
-                       <footer class="mt-auto border-t border-white/10 bg-black/80 py-8 px-4 text-center space-y-3">
-            <!-- COPYRIGHT LINE HERE -->
-            <p class="text-xs text-gray-400 font-sans">&copy; <span id="current-year"></span> KBEZ MC SHOP. All rights reserved.</p>
-            
-            <p class="text-xs text-gray-500">Not affiliated with Mojang Studios or Microsoft.</p>
-            
-            <!-- Rest of your footer... -->
-            
-            <p class="text-sm text-green-400 mt-2">
-                Contact: 
-                <a href="https://t.me/sokb07" style="color: #FFD700;" target="_blank" class="hover:underline font-bold">
-                    Admin on Telegram
-                </a>
-            </p>
-            
-            <!-- Cleaned up Social Media Icons -->
-            <div class="flex justify-center gap-6 mt-4 mb-2">
-                <a href="https://www.youtube.com/@KbezMC" target="_blank" class="text-gray-400 hover:text-red-500 transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@kbez077" target="_blank" class="text-gray-400 hover:text-white transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-tiktok"></i></a>
-                <a href="https://t.me/sokb07" target="_blank" class="text-gray-400 hover:text-blue-400 transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-telegram"></i></a>
-                <a href="https://t.me/sokb_07" target="_blank" class="text-gray-400 hover:text-blue-400 transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-telegram"></i></a>
+        <!-- SUPPORT & FAQ VIEW -->
+        <section id="view-contact" class="tab-view space-y-10 hidden">
+            <div class="app-card px-6 py-10 sm:py-12 text-center relative overflow-hidden">
+                <h2 class="app-header-title text-3xl sm:text-4xl font-bold mb-3 text-mcGold">Contact Us</h2>
+                <p class="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto">We're here to help 24/7! Choose your preferred way to reach us.</p>
             </div>
-        </footer>
-    </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto">
+                <div class="app-card p-6 sm:p-7 text-center space-y-3">
+                    <div class="text-4xl sm:text-5xl text-mcGold"><i class="fab fa-telegram"></i></div>
+                    <h3 class="app-header-title text-lg font-bold text-white">Telegram</h3>
+                    <div class="text-mcGold font-semibold">@sokb07</div>
+                    <p class="text-gray-300 text-xs">⏱ Response time: 2-10 minutes, or just leave a message for us.</p>
+                    <a href="https://t.me/sokb07" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2">
+                        <i class="fab fa-telegram"></i> Message on Telegram
+                    </a>
+                </div>
+
+                <div class="app-card p-6 sm:p-7 text-center space-y-3">
+                    <div class="text-4xl sm:text-5xl text-mcGold"><i class="fab fa-discord"></i></div>
+                    <h3 class="app-header-title text-lg font-bold text-white">Discord</h3>
+                    <div class="text-mcGold font-semibold">MC Shop Support</div>
+                    <p class="text-gray-300 text-xs">⏱ Response time: 5-20 minutes</p>
+                    <a href="https://discord.gg/QzQXF7syUc" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2">
+                        <i class="fab fa-discord"></i> Join Discord
+                    </a>
+                </div>
+            </div>
+
+            <div class="max-w-2xl mx-auto space-y-3">
+                <h3 class="app-header-title text-xl sm:text-2xl font-bold text-mcGold text-center mb-5">Frequently Asked Questions</h3>
+
+                <details class="app-card p-4 sm:p-5 rounded-xl">
+                    <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                        <span><span class="text-pink-400 mr-2">?</span>How long does delivery take?</span>
+                        <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                    </summary>
+                    <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Delivery takes 5-15 minutes after payment verification. You'll receive the account details via Telegram.</p>
+                </details>
+
+                <details class="app-card p-4 sm:p-5 rounded-xl">
+                    <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                        <span><span class="text-pink-400 mr-2">?</span>How can I redeem the codes/cape?</span>
+                        <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                    </summary>
+                    <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Login to <a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">minecraft.net</a>, go to <a href="https://www.minecraft.net/redeem" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">Minecraft Redeem</a>, and click "Redeem". Then go to your Minecraft Bedrock game to equip the cape and join any server for 5 minutes. Finally, you'll see your cape in <span class="text-cyan-300 underline">View Cape & Skin</span>.</p>
+                </details>
+
+                <details class="app-card p-4 sm:p-5 rounded-xl">
+                    <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                        <span><span class="text-pink-400 mr-2">?</span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                    </summary>
+                    <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">We accept all Bakong's QR code is provided when u chatted to admin.</p>
+                </details>
+
+                <details class="app-card p-4 sm:p-5 rounded-xl">
+                    <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                        <span><span class="text-pink-400 mr-2">?</span>Can I get a refund if the account doesn't work?</span>
+                        <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                    </summary>
+                    <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">We offer a 7-day replacement guarantee. If the account stops working, we'll replace it for free. No cash refunds.</p>
+                </details>
+
+                <details class="app-card p-4 sm:p-5 rounded-xl">
+                    <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                        <span><span class="text-pink-400 mr-2">?</span>How do I change the account password?</span>
+                        <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                    </summary>
+                    <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Login to <a href="https://account.microsoft.com/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">microsoft.com</a>, go to Account Settings, and click "Change Password". We recommend changing it immediately.</p>
+                </details>
+
+                <details class="app-card p-4 sm:p-5 rounded-xl">
+                    <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-bold text-sm text-white">
+                        <span><span class="text-pink-400 mr-2">?</span>Do I need to provide anything after payment?</span>
+                        <i class="fas fa-chevron-down text-mcGold text-xs"></i>
+                    </summary>
+                    <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mt-5">Just send your payment screenshot on Telegram and we'll deliver your account within minutes.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- MEDIA / SOCIALS VIEW -->
+        <section id="view-media" class="tab-view space-y-10 hidden">
+            <div class="app-card px-6 py-10 sm:py-12 text-center relative overflow-hidden">
+                <h2 class="app-header-title text-3xl sm:text-4xl font-bold mb-3 text-mcGold">Follow Our Media</h2>
+                <p class="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto">Stay updated with our latest drops, gameplay, and Minecraft content!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
+                
+                <!-- YouTube Card -->
+                <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl sm:text-5xl text-red-600 group-hover:scale-110 transition-transform mb-3">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <h3 class="app-header-title text-lg font-bold text-white mb-1">YouTube</h3>
+                        <div class="text-mcGold font-semibold mb-2">@KbezMC</div>
+                        <p class="text-gray-300 text-xs mb-4">Watch our latest gameplay and shop showcases.</p>
+                    </div>
+                    <a href="https://www.youtube.com/@KbezMC" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)]">
+                        <i class="fab fa-youtube"></i> Subscribe
+                    </a>
+                </div>
+
+                <!-- TikTok Card -->
+                <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl sm:text-5xl text-white group-hover:scale-110 transition-transform mb-3">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                        <h3 class="app-header-title text-lg font-bold text-white mb-1">TikTok</h3>
+                        <div class="text-mcGold font-semibold mb-2">@kbez077</div>
+                        <p class="text-gray-300 text-xs mb-4">Short clips, tricks, and daily Minecraft shorts.</p>
+                    </div>
+                    <a href="https://www.tiktok.com/@kbez077" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-black hover:bg-gray-900 border border-white/20 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                        <i class="fab fa-tiktok"></i> Follow
+                    </a>
+                </div>
+                
+                <!-- Telegram Channel Card -->
+                <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl sm:text-5xl text-blue-500 group-hover:scale-110 transition-transform mb-3">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <h3 class="app-header-title text-lg font-bold text-white mb-1">Telegram</h3>
+                        <div class="text-mcGold font-semibold mb-2">@sokb_07</div>
+                        <p class="text-gray-300 text-xs mb-4">New Updates, Premium Accounts, Capes & Packs.</p>
+                    </div>
+                    <a href="https://t.me/sokb_07" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-blue-500 hover:bg-blue-400 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                        <i class="fab fa-telegram"></i> Join Now
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-auto border-t border-white/10 bg-black/80 py-8 px-4 text-center space-y-3">
+        <!-- COPYRIGHT LINE HERE -->
+        <p class="text-xs text-gray-400 font-sans">&copy; <span id="current-year"></span> KBEZ MC SHOP. All rights reserved.</p>
+        
+        <p class="text-xs text-gray-500">Not affiliated with Mojang Studios or Microsoft.</p>
+        
+        <p class="text-sm text-green-400 mt-2">
+            Contact: 
+            <a href="https://t.me/sokb07" style="color: #FFD700;" target="_blank" class="hover:underline font-bold">
+                Admin on Telegram
+            </a>
+        </p>
+        
+        <!-- Cleaned up Social Media Icons -->
+        <div class="flex justify-center gap-6 mt-4 mb-2">
+            <a href="https://www.youtube.com/@KbezMC" target="_blank" class="text-gray-400 hover:text-red-500 transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@kbez077" target="_blank" class="text-gray-400 hover:text-white transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-tiktok"></i></a>
+            <a href="https://t.me/sokb07" target="_blank" class="text-gray-400 hover:text-blue-400 transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-telegram"></i></a>
+            <a href="https://t.me/sokb_07" target="_blank" class="text-gray-400 hover:text-blue-400 transition-all duration-300 text-2xl hover:scale-110"><i class="fab fa-telegram"></i></a>
+        </div>
+    </footer>
 
     <!-- CART DRAWER -->
     <div id="cartOverlay" class="fixed inset-0 bg-black/80 z-50 hidden" onclick="toggleCart()"></div>
@@ -730,7 +734,7 @@
         </div>
     </div>
 
-        <!-- CHECKOUT MODAL -->
+    <!-- CHECKOUT MODAL -->
     <div id="checkoutModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 hidden">
         <div class="app-card w-full max-w-lg p-6 sm:p-8 space-y-6 relative rounded-2xl">
             <button onclick="closeCheckout()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
@@ -738,14 +742,13 @@
             <h3 class="app-header-title text-base sm:text-lg text-mcGold text-center font-bold">COMPLETE ORDER ON TELEGRAM</h3>
             <p class="text-center text-gray-300 text-xs">Click the button below to send your cart details directly to our Telegram to finish your purchase.</p>
             
-            <!-- Removed the username input -->
-            
             <button onclick="submitOrder()" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
                 <i class="fab fa-telegram"></i> SEND TO TELEGRAM
             </button>
         </div>
     </div>
-        <!-- PACK PREVIEW MODAL -->
+
+    <!-- PACK PREVIEW MODAL -->
     <div id="packPreviewModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 hidden backdrop-blur-sm">
         <div class="app-card w-full max-w-4xl p-4 sm:p-6 relative rounded-2xl flex flex-col">
             <div class="flex justify-between items-center mb-4">
@@ -754,14 +757,14 @@
             </div>
             
             <div class="w-full aspect-video bg-black rounded-xl overflow-hidden flex items-center justify-center relative">
-                <!-- The video or image will be injected here -->
                 <div id="previewModalContent" class="w-full h-full"></div>
             </div>
         </div>
     </div>
 
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 border border-emerald-500 px-6 py-3 rounded-xl text-white text-xs font-semibold"></div>
-        <!-- FLOATING MOBILE CART CHECKOUT -->
+
+    <!-- FLOATING MOBILE CART CHECKOUT -->
     <div id="floatingCartBar" class="fixed bottom-4 left-4 right-4 z-40 bg-emerald-600 rounded-xl p-3 shadow-2xl flex justify-between items-center transform translate-y-32 transition-transform duration-300 md:hidden">
         <div class="flex items-center gap-2 text-white">
             <i class="fas fa-shopping-cart text-lg"></i>
@@ -771,7 +774,8 @@
             CHECKOUT <i class="fab fa-telegram"></i>
         </button>
     </div>
-        <!-- FLOATING PC CART WIDGET -->
+
+    <!-- FLOATING PC CART WIDGET -->
     <div id="floatingPcCart" class="fixed bottom-8 right-8 z-40 bg-gray-900 border border-emerald-500/50 rounded-2xl p-4 shadow-[0_10px_40px_rgba(16,185,129,0.2)] hidden md:flex items-center justify-between gap-6 transform translate-y-32 opacity-0 transition-all duration-300">
         <div class="flex items-center gap-3">
             <div class="bg-emerald-500/20 p-3 rounded-xl text-emerald-400">
@@ -790,7 +794,8 @@
 <script>
     // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
     let audioEnabled = true;
-        // --- LANGUAGE SYSTEM ---
+
+    // --- LANGUAGE SYSTEM ---
     let currentLang = 'en';
     const translations = {
         en: {
@@ -826,14 +831,11 @@
     function toggleLanguage() {
         currentLang = currentLang === 'en' ? 'kh' : 'en';
         
-        // Update the toggle button text
         document.getElementById('langText').textContent = currentLang === 'en' ? 'KH' : 'EN';
         
-        // Re-render the catalogs to apply new language
         renderCatalogs();
         sortPacks(document.getElementById('packSortSelect').value);
         
-        // Update the sorting dropdown options
         const select = document.getElementById('packSortSelect');
         select.options[0].text = t('sortAll');
         select.options[1].text = t('sortFree');
@@ -842,6 +844,7 @@
         select.options[4].text = t('sortHigh');
         document.querySelector('.fa-filter').nextElementSibling.textContent = t('sortLabel');
     }
+
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function unlockAudio() {
@@ -1070,7 +1073,7 @@
         `;
     }
 
-            function renderAllGrid() {
+    function renderAllGrid() {
         const accountCards = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         const capeCards = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
         
@@ -1085,7 +1088,6 @@
                         }
                     </div>
                     
-                    <!-- IMAGE CONTAINER -->
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden relative group">
                         ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
                         
@@ -1104,7 +1106,6 @@
                     </ul>
                 </div>
                 
-                <!-- BUTTONS CONTAINER -->
                 <div class="flex flex-col gap-2">
                     ${m.price ? 
                         `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
@@ -1128,7 +1129,7 @@
         document.getElementById('allGrid').innerHTML = accountCards + capeCards + miscCards;
     }
 
-            function renderCatalogs() {
+    function renderCatalogs() {
         renderAllGrid();
         document.getElementById('accountsGrid').innerHTML = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         document.getElementById('capesGrid').innerHTML = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
@@ -1144,7 +1145,6 @@
                         }
                     </div>
                     
-                    <!-- IMAGE CONTAINER -->
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden relative group">
                         ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
                         
@@ -1163,7 +1163,6 @@
                     </ul>
                 </div>
                 
-                <!-- BUTTONS CONTAINER -->
                 <div class="flex flex-col gap-2">
                     ${m.price ? 
                         `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
@@ -1184,10 +1183,10 @@
             </div>
         `).join('');
     }
-           function sortPacks(sortType) {
+
+    function sortPacks(sortType) {
         playSfx('click');
         
-        // Create a copy of the array
         let sortedData = [...productsData.misc];
 
         if (sortType === 'free') {
@@ -1200,7 +1199,6 @@
             sortedData = sortedData.filter(m => m.price).sort((a, b) => b.price - a.price);
         }
 
-        // Now render the sorted/filtered data
         document.getElementById('miscGrid').innerHTML = sortedData.map(m => `
             <div class="app-card p-6 flex flex-col justify-between">
                 <div>
@@ -1212,7 +1210,6 @@
                         }
                     </div>
                     
-                    <!-- IMAGE CONTAINER -->
                     <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden relative group">
                         ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
                         
@@ -1231,7 +1228,6 @@
                     </ul>
                 </div>
                 
-                <!-- BUTTONS CONTAINER -->
                 <div class="flex flex-col gap-2">
                     ${m.price ? 
                         `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
@@ -1252,48 +1248,7 @@
             </div>
         `).join('');
     }
-    // Play preview directly inside the card
-         function playInlinePreview(id, previewUrl) {
-        playSfx('click');
-        const container = document.getElementById(`preview-container-${id}`);
-        
-        if (container.querySelector('video') || container.querySelector('iframe')) return;
 
-        let mediaHTML = '';
-        
-        if (previewUrl.includes('youtube.com') || previewUrl.includes('youtu.be') || previewUrl.includes('vimeo.com')) {
-            let embedUrl = '';
-            let videoId = '';
-
-            if (previewUrl.includes('youtu.be/')) {
-                videoId = previewUrl.split('youtu.be/')[1].split(/[?&]/)[0];
-            } else if (previewUrl.includes('watch?v=')) {
-                videoId = previewUrl.split('watch?v=')[1].split('&')[0];
-            }
-
-            if (videoId) {
-                embedUrl = 'https://www.youtube.com/embed/' + videoId;
-            } else {
-                embedUrl = previewUrl; 
-            }
-            
-           mediaHTML = `<iframe src="${embedUrl}?autoplay=1" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
-        } else if (previewUrl.endsWith('.mp4') || previewUrl.endsWith('.webm')) {
-            mediaHTML = `<video src="${previewUrl}" autoplay controls class="w-full h-full object-contain"></video>`;
-        } else {
-            mediaHTML = `<img src="${previewUrl}" class="w-full h-full object-contain">`;
-        }
-
-        // 👇 THIS IS WHAT WAS MISSING! 👇
-        // This actually puts the video into the card on the screen
-        container.innerHTML = `
-            <button onclick="closeInlinePreview('${id}', '${previewUrl}')" class="absolute top-2 right-2 z-10 bg-black/80 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-500 transition">
-                <i class="fas fa-times text-xs"></i>
-            </button>
-            ${mediaHTML}
-        `;
-    }
-        // Open the big preview modal
     function openPreviewModal(title, previewUrl) {
         playSfx('click');
         document.getElementById('previewModalTitle').textContent = title + " Preview";
@@ -1327,44 +1282,17 @@
         document.getElementById('packPreviewModal').classList.remove('hidden');
     }
 
-    // Close the preview modal
     function closePreviewModal() {
         playSfx('remove');
         document.getElementById('packPreviewModal').classList.add('hidden');
-        document.getElementById('previewModalContent').innerHTML = ''; // Stops the video from playing in the background
-    }
-
-    // Close the preview and go back to the image
-    function closeInlinePreview(id, previewUrl) {
-        playSfx('remove');
-        const container = document.getElementById(`preview-container-${id}`);
-        
-        const iframe = container.querySelector('iframe');
-        const video = container.querySelector('video');
-        if (iframe) iframe.src = '';
-        if (video) video.pause();
-
-        container.innerHTML = `
-            <img id="preview-img-${id}" src="" alt="" class="h-full object-contain">
-            <div class="absolute inset-0 bg-black/40 flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity pointer-events-none">
-                <div class="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
-                    <i class="fas fa-play ml-1 text-lg"></i>
-                </div>
-            </div>
-        `;
-        
-        const product = productsData.misc.find(p => p.id === id);
-        container.querySelector('img').src = product.image || 'https://placehold.co/300x180/111827/f59e0b?text=Preview';
-        container.querySelector('img').onerror = function() { this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'; };
-        
-        container.onclick = () => playInlinePreview(id, previewUrl);
+        document.getElementById('previewModalContent').innerHTML = '';
     }
 
     function switchTab(tabId) {
         playSfx('tab');
         
         window.location.hash = (tabId === 'misc') ? 'packs' : tabId;
-                // Reset the sort dropdown when switching tabs
+
         const sortSelect = document.getElementById('packSortSelect');
         if (sortSelect) sortSelect.value = 'default';
 
