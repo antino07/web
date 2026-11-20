@@ -544,13 +544,31 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="capesGrid"></div>
             </section>
-
-            <!-- MISC VIEW -->
+                    
+                       <!-- MISC VIEW -->
             <section id="view-misc" class="tab-view space-y-8 hidden">
                 <div class="app-card p-6 sm:p-10 text-center relative overflow-hidden">
                     <h2 class="app-header-title text-2xl sm:text-4xl font-bold mb-3 text-mcGold">RESOURCE PACKS & MAPS</h2>
                     <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">High performance PvP texture packs and practice maps ready for immediate download.</p>
                 </div>
+
+                <!-- 👇 ADD THIS SORTING BAR HERE 👇 -->
+                <div class="flex flex-col sm:flex-row justify-between items-center bg-black/40 p-4 rounded-xl border border-white/10 gap-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-filter text-mcGold"></i>
+                        <span class="text-white text-sm font-bold">Filter & Sort:</span>
+                    </div>
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <select id="packSortSelect" onchange="sortPacks(this.value)" class="bg-black/60 text-white text-sm rounded-lg px-4 py-2 border border-white/20 focus:outline-none focus:border-mcGold w-full sm:w-auto cursor-pointer font-sans">
+                            <option value="default">Default (All)</option>
+                            <option value="free">Free Packs Only</option>
+                            <option value="paid">Paid Packs Only</option>
+                            <option value="lowest">Price: Lowest to Highest</option>
+                            <option value="highest">Price: Highest to Lowest</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="miscGrid"></div>
             </section>
 
@@ -1133,6 +1151,75 @@
             </div>
         `).join('');
     }
+        // --- PACK SORTING LOGIC ---
+    function sortPacks(sortType) {
+        playSfx('click');
+        
+        // Create a copy of the array so we don't mess up the original data
+        let sortedData = [...productsData.misc];
+
+        if (sortType === 'free') {
+            sortedData = sortedData.filter(m => !m.price);
+        } else if (sortType === 'paid') {
+            sortedData = sortedData.filter(m => m.price);
+        } else if (sortType === 'lowest') {
+            sortedData.sort((a, b) => (a.price || 0) - (b.price || 0));
+        } else if (sortType === 'highest') {
+            sortedData.sort((a, b) => (b.price || 0) - (a.price || 0));
+        }
+
+        // Now render the sorted/filtered data
+        document.getElementById('miscGrid').innerHTML = sortedData.map(m => `
+            <div class="app-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        ${m.price ? 
+                            `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-mcGold/20 text-mcGold flex items-center gap-1"><i class="fas fa-tag text-[8px]"></i> $${m.price.toFixed(2)}</span>` 
+                            : 
+                            `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 flex items-center gap-1"><i class="fas fa-save text-[8px]"></i> ${m.size}</span>`
+                        }
+                    </div>
+                    
+                    <!-- IMAGE CONTAINER -->
+                    <div class="w-full h-36 bg-black rounded-xl mb-4 flex items-center justify-center border border-white/5 overflow-hidden relative group">
+                        ${m.image ? `<img src="${m.image}" alt="${m.title}" class="h-full object-contain" onerror="this.src='https://placehold.co/300x180/111827/f59e0b?text=App+Image'">` : `<i class="fas fa-file-archive text-amber-500 text-4xl"></i>`}
+                        
+                        ${m.preview ? `
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity cursor-pointer" onclick="openPreviewModal('${m.title}', '${m.preview}')">
+                                <div class="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-play ml-1 text-lg"></i>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <h3 class="font-bold text-sm text-white mb-3">${m.title}</h3>
+                    <ul class="space-y-2 mb-6 text-xs text-gray-300">
+                        ${m.features ? m.features.map(f => `<li><i class="fas fa-check-circle text-emerald-400 mr-1"></i> ${f}</li>`).join('') : ''}
+                    </ul>
+                </div>
+                
+                <!-- BUTTONS CONTAINER -->
+                <div class="flex flex-col gap-2">
+                    ${m.price ? 
+                        `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
+                            <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
+                        </button>` 
+                        : 
+                        `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
+                            <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
+                        </a>`
+                    }
+                    ${m.preview ? 
+                        `<button onclick="openPreviewModal('${m.title}', '${m.preview}')" class="w-full py-2.5 text-xs font-bold rounded-xl border border-gray-500 text-gray-300 hover:bg-white/10 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-eye"></i> PREVIEW PACK
+                        </button>` 
+                        : ''
+                    }
+                </div>
+            </div>
+        `).join('');
+    }
     // Play preview directly inside the card
          function playInlinePreview(id, previewUrl) {
         playSfx('click');
@@ -1245,6 +1332,9 @@
         playSfx('tab');
         
         window.location.hash = (tabId === 'misc') ? 'packs' : tabId;
+                // Reset the sort dropdown when switching tabs
+        const sortSelect = document.getElementById('packSortSelect');
+        if (sortSelect) sortSelect.value = 'default';
 
         document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
         const target = document.getElementById(`view-${tabId}`);
