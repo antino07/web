@@ -1151,11 +1151,10 @@
             </div>
         `).join('');
     }
-        // --- PACK SORTING LOGIC ---
-    function sortPacks(sortType) {
+        function sortPacks(sortType) {
         playSfx('click');
         
-        // Create a copy of the array so we don't mess up the original data
+        // Create a copy of the array
         let sortedData = [...productsData.misc];
 
         if (sortType === 'free') {
@@ -1163,9 +1162,11 @@
         } else if (sortType === 'paid') {
             sortedData = sortedData.filter(m => m.price);
         } else if (sortType === 'lowest') {
-            sortedData.sort((a, b) => (a.price || 0) - (b.price || 0));
+            // Filter out free packs, then sort lowest to highest
+            sortedData = sortedData.filter(m => m.price).sort((a, b) => a.price - b.price);
         } else if (sortType === 'highest') {
-            sortedData.sort((a, b) => (b.price || 0) - (a.price || 0));
+            // Filter out free packs, then sort highest to lowest
+            sortedData = sortedData.filter(m => m.price).sort((a, b) => b.price - a.price);
         }
 
         // Now render the sorted/filtered data
