@@ -440,41 +440,6 @@
             </div>
         </div>
     </header>
-
-    <!-- ================= MAIN SHOWCASE FRAME WRAPPER ================= -->
-    <div id="appViewportFrame" class="flex-grow w-full flex flex-col transition-all duration-300">
-        
-        <div id="themeBanner" class="bg-black/80 border-b border-gray-800 py-2 px-4 text-xs font-sans tracking-wider text-center text-emerald-400 flex flex-wrap justify-center gap-6">
-            <span class="flex items-center gap-2"><i class="fas fa-bolt text-mcGold"></i> 500+ ACCOUNTS WERE SOLD</span>
-            <span class="flex items-center gap-2"><i class="fas fa-shield-alt text-cyan-400"></i> 7-DAY GUARANTEE</span>
-            <span class="flex items-center gap-2"><i class="fas fa-users text-mcGold"></i> 450+ SATISFIED CUSTOMERS</span>
-        </div>
-
-                <nav class="bg-black/50 border-b border-white/10 px-4 sm:px-8 py-4 sticky top-14 z-40 backdrop-blur-md">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                
-                <div class="flex items-center justify-between w-full md:w-auto">
-                    <a href="#accounts" onclick="switchTab('accounts')" class="flex items-center gap-3 group">
-                        <div class="w-10 h-10 border-2 border-mcGold bg-emerald-500/20 flex items-center justify-center rounded-lg overflow-hidden shadow">
-                            <img src="images.png" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/40x40/388e3c/ffaa00?text=MC'">
-                        </div>
-                        <span class="app-header-title text-lg sm:text-xl font-bold tracking-tight text-white">KBEZ MC SHOP</span>
-                    </a>
-
-                    <div class="flex items-center gap-3 md:hidden">
-                        <button onclick="toggleAudio()" id="soundBtnMobile" class="p-2 bg-black/60 border border-white/20 text-mcGold text-xs rounded-lg" title="Toggle Sound SFX">
-                            <i class="fas fa-volume-up"></i>
-                        </button>
-                        <button onclick="toggleCart()" class="relative p-2 bg-emerald-500/20 border border-emerald-500/40 text-mcGold rounded-lg">
-                            <i class="fas fa-shopping-cart text-lg"></i>
-                            <span id="mobileCartCount" class="absolute -top-2 -right-2 bg-mcGold text-black font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center border border-black">0</span>
-                        </button>
-                        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-white text-xl p-1">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                    </div>
-                </div>
-
                 <!-- THE FIX IS HERE: Added order-3 md:order-none -->
                 <div class="relative w-full md:w-72 order-3 md:order-none">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
@@ -492,7 +457,11 @@
                     <button onclick="switchTab('contact')" data-tab="contact" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Support & FAQ</button>
                 </div>
 
+                <!-- Controls (Sound, Cart, Language, Mobile View) -->
                 <div class="hidden md:flex items-center gap-3">
+                    <button onclick="toggleLanguage()" id="langToggleBtn" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-sans text-mcGold flex items-center gap-2 transition font-bold" title="Switch Language">
+                        <i class="fas fa-language"></i> <span id="langText">KH</span>
+                    </button>
                     <button onclick="toggleAudio()" id="soundBtnDesktop" class="px-3 py-2 bg-black/60 border border-white/10 text-mcGold text-xs rounded-xl hover:bg-white/10 transition flex items-center gap-1.5" title="Toggle Sound SFX Engine">
                         <i class="fas fa-volume-up text-emerald-400"></i>
                         <span>SFX: ON</span>
@@ -501,6 +470,9 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span>CART</span>
                         <span id="desktopCartCount" class="bg-black text-mcGold px-2 py-0.5 rounded ml-1 text-[11px]">0</span>
+                    </button>
+                    <button onclick="toggleMobileView()" id="mobileViewBtnD" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-sans text-gray-300 flex items-center gap-2 transition">
+                        <i class="fas fa-mobile-alt"></i> <span id="viewModeText">Mobile Frame</span>
                     </button>
                 </div>
             </div>
@@ -817,6 +789,58 @@
 <script>
     // --- 5-SOUND RETRO SYNTHESIZER ENGINE ---
     let audioEnabled = true;
+        // --- LANGUAGE SYSTEM ---
+    let currentLang = 'en';
+    const translations = {
+        en: {
+            download: "DOWNLOAD FOR FREE",
+            downloadPack: "DOWNLOAD FREE PACK",
+            buyNow: "BUY NOW",
+            preview: "PREVIEW PACK",
+            sortLabel: "Filter & Sort:",
+            sortAll: "Default (All)",
+            sortFree: "Free Packs Only",
+            sortPaid: "Paid Packs Only",
+            sortLow: "Price: Lowest to Highest",
+            sortHigh: "Price: Highest to Lowest"
+        },
+        kh: {
+            download: "ទាញយកដោយឥតគិតថ្លៃ",
+            downloadPack: "ទាញយកឥតគិតថ្លៃ",
+            buyNow: "ទិញឥឡូវនេះ",
+            preview: "មើល Pack",
+            sortLabel: "តម្រង និងតម្រៀប:",
+            sortAll: "ទាំងអស់",
+            sortFree: "តែឥតគិតថ្លៃ",
+            sortPaid: "តែមានតម្លៃ",
+            sortLow: "តម្លៃ: ទាបទៅខ្ពស់",
+            sortHigh: "តម្លៃ: ខ្ពស់ទៅទាប"
+        }
+    };
+
+    function t(key) {
+        return translations[currentLang][key] || key;
+    }
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'kh' : 'en';
+        
+        // Update the toggle button text
+        document.getElementById('langText').textContent = currentLang === 'en' ? 'KH' : 'EN';
+        
+        // Re-render the catalogs to apply new language
+        renderCatalogs();
+        sortPacks(document.getElementById('packSortSelect').value);
+        
+        // Update the sorting dropdown options
+        const select = document.getElementById('packSortSelect');
+        select.options[0].text = t('sortAll');
+        select.options[1].text = t('sortFree');
+        select.options[2].text = t('sortPaid');
+        select.options[3].text = t('sortLow');
+        select.options[4].text = t('sortHigh');
+        document.querySelector('.fa-filter').nextElementSibling.textContent = t('sortLabel');
+    }
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function unlockAudio() {
@@ -1045,7 +1069,7 @@
         `;
     }
 
-         function renderAllGrid() {
+            function renderAllGrid() {
         const accountCards = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         const capeCards = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
         
@@ -1083,16 +1107,16 @@
                 <div class="flex flex-col gap-2">
                     ${m.price ? 
                         `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
-                            <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
+                            <i class="fab fa-telegram"></i> ${t('buyNow')} - $${m.price.toFixed(2)}
                         </button>` 
                         : 
                         `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                            <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
+                            <i class="fas fa-download"></i> ${m.isExternal ? t('download') : t('downloadPack')}
                         </a>`
                     }
                     ${m.preview ? 
                         `<button onclick="openPreviewModal('${m.title}', '${m.preview}')" class="w-full py-2.5 text-xs font-bold rounded-xl border border-gray-500 text-gray-300 hover:bg-white/10 transition flex items-center justify-center gap-2">
-                            <i class="fas fa-eye"></i> PREVIEW PACK
+                            <i class="fas fa-eye"></i> ${t('preview')}
                         </button>` 
                         : ''
                     }
@@ -1103,7 +1127,7 @@
         document.getElementById('allGrid').innerHTML = accountCards + capeCards + miscCards;
     }
 
-        function renderCatalogs() {
+            function renderCatalogs() {
         renderAllGrid();
         document.getElementById('accountsGrid').innerHTML = productsData.accounts.map(p => renderCardHTML(p, 'account')).join('');
         document.getElementById('capesGrid').innerHTML = productsData.capes.map(p => renderCardHTML(p, 'cape')).join('');
@@ -1142,16 +1166,16 @@
                 <div class="flex flex-col gap-2">
                     ${m.price ? 
                         `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
-                            <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
+                            <i class="fab fa-telegram"></i> ${t('buyNow')} - $${m.price.toFixed(2)}
                         </button>` 
                         : 
                         `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                            <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
+                            <i class="fas fa-download"></i> ${m.isExternal ? t('download') : t('downloadPack')}
                         </a>`
                     }
                     ${m.preview ? 
                         `<button onclick="openPreviewModal('${m.title}', '${m.preview}')" class="w-full py-2.5 text-xs font-bold rounded-xl border border-gray-500 text-gray-300 hover:bg-white/10 transition flex items-center justify-center gap-2">
-                            <i class="fas fa-eye"></i> PREVIEW PACK
+                            <i class="fas fa-eye"></i> ${t('preview')}
                         </button>` 
                         : ''
                     }
@@ -1159,7 +1183,7 @@
             </div>
         `).join('');
     }
-        function sortPacks(sortType) {
+           function sortPacks(sortType) {
         playSfx('click');
         
         // Create a copy of the array
@@ -1170,10 +1194,8 @@
         } else if (sortType === 'paid') {
             sortedData = sortedData.filter(m => m.price);
         } else if (sortType === 'lowest') {
-            // Filter out free packs, then sort lowest to highest
             sortedData = sortedData.filter(m => m.price).sort((a, b) => a.price - b.price);
         } else if (sortType === 'highest') {
-            // Filter out free packs, then sort highest to lowest
             sortedData = sortedData.filter(m => m.price).sort((a, b) => b.price - a.price);
         }
 
@@ -1212,16 +1234,16 @@
                 <div class="flex flex-col gap-2">
                     ${m.price ? 
                         `<button onclick="buyPackTelegram('${m.title}', ${m.price}, '${m.botCommand || ''}')" class="btn-primary w-full py-3 text-xs flex items-center justify-center gap-2">
-                            <i class="fab fa-telegram"></i> BUY NOW - $${m.price.toFixed(2)}
+                            <i class="fab fa-telegram"></i> ${t('buyNow')} - $${m.price.toFixed(2)}
                         </button>` 
                         : 
                         `<a href="${m.file}" ${m.isExternal ? 'target="_blank" rel="noopener noreferrer"' : 'download'} class="btn-primary w-full py-3 text-xs text-center flex items-center justify-center gap-2">
-                            <i class="fas fa-download"></i> ${m.isExternal ? 'DOWNLOAD FOR FREE' : 'DOWNLOAD FREE PACK'}
+                            <i class="fas fa-download"></i> ${m.isExternal ? t('download') : t('downloadPack')}
                         </a>`
                     }
                     ${m.preview ? 
                         `<button onclick="openPreviewModal('${m.title}', '${m.preview}')" class="w-full py-2.5 text-xs font-bold rounded-xl border border-gray-500 text-gray-300 hover:bg-white/10 transition flex items-center justify-center gap-2">
-                            <i class="fas fa-eye"></i> PREVIEW PACK
+                            <i class="fas fa-eye"></i> ${t('preview')}
                         </button>` 
                         : ''
                     }
