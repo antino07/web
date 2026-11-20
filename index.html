@@ -393,7 +393,6 @@
 </head>
 <body class="theme-modern min-h-screen flex flex-col antialiased" style="background-color: #0b0f19; color: #f3f4f6;">
 
-      <!-- ================= TOP NAVIGATION & SEARCH ================= -->
        <!-- ================= MAIN NAVIGATION BAR (Logo, Search, Links) ================= -->
     <div class="bg-black/80 border-b border-gray-800 py-2 px-4 text-xs font-sans tracking-wider text-center text-emerald-400 flex flex-wrap justify-center gap-6 shadow-inner">
         <span class="flex items-center gap-2"><i class="fas fa-bolt text-mcGold"></i> 500+ ACCOUNTS WERE SOLD</span>
@@ -1368,7 +1367,7 @@
         updateCartUI();
     }
 
-      function updateCartUI() {
+    function updateCartUI() {
         const count = cart.reduce((sum, i) => sum + i.qty, 0);
         const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
         
@@ -1407,7 +1406,6 @@
             pcCart.classList.add('translate-y-32', 'opacity-0');
         }
     }
-
     function buyPackTelegram(title, price, commandStr) {
         playSfx('addCart'); 
         const cleanTitle = commandStr ? commandStr : title.replace(' Code', '');
