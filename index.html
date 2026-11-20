@@ -654,57 +654,63 @@
                 </div>
             </section>
 
-            <!-- MEDIA / SOCIALS VIEW -->
+                       <!-- MEDIA / SOCIALS VIEW -->
             <section id="view-media" class="tab-view space-y-10 hidden">
                 <div class="app-card px-6 py-10 sm:py-12 text-center relative overflow-hidden">
                     <h2 class="app-header-title text-3xl sm:text-4xl font-bold mb-3 text-mcGold">Follow Our Media</h2>
                     <p class="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto">Stay updated with our latest drops, gameplay, and Minecraft content!</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
+                <!-- Changed to lg:grid-cols-3 so the 3 cards fit perfectly side-by-side -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
+                    
                     <!-- YouTube Card -->
-                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform">
-                        <div class="text-4xl sm:text-5xl text-red-600 group-hover:scale-110 transition-transform">
-                            <i class="fab fa-youtube"></i>
+                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl sm:text-5xl text-red-600 group-hover:scale-110 transition-transform mb-3">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <h3 class="app-header-title text-lg font-bold text-white mb-1">YouTube</h3>
+                            <div class="text-mcGold font-semibold mb-2">@KbezMC</div>
+                            <p class="text-gray-300 text-xs mb-4">Watch our latest gameplay and shop showcases.</p>
                         </div>
-                        <h3 class="app-header-title text-lg font-bold text-white">YouTube</h3>
-                        <div class="text-mcGold font-semibold">@KbezMC</div>
-                        <p class="text-gray-300 text-xs">Watch our latest gameplay and shop showcases.</p>
-                        <a href="https://www.youtube.com/@KbezMC" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2 bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)]">
+                        <a href="https://www.youtube.com/@KbezMC" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)]">
                             <i class="fab fa-youtube"></i> Subscribe
                         </a>
                     </div>
 
                     <!-- TikTok Card -->
-                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform">
-                        <div class="text-4xl sm:text-5xl text-white group-hover:scale-110 transition-transform">
-                            <i class="fab fa-tiktok"></i>
+                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl sm:text-5xl text-white group-hover:scale-110 transition-transform mb-3">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <h3 class="app-header-title text-lg font-bold text-white mb-1">TikTok</h3>
+                            <div class="text-mcGold font-semibold mb-2">@kbez077</div>
+                            <p class="text-gray-300 text-xs mb-4">Short clips, tricks, and daily Minecraft shorts.</p>
                         </div>
-                        <h3 class="app-header-title text-lg font-bold text-white">TikTok</h3>
-                        <div class="text-mcGold font-semibold">@kbez077</div>
-                        <p class="text-gray-300 text-xs">Short clips, tricks, and daily Minecraft shorts.</p>
-                        <a href="https://www.tiktok.com/@kbez077" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2 bg-black hover:bg-gray-900 border border-white/20 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                        <a href="https://www.tiktok.com/@kbez077" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-black hover:bg-gray-900 border border-white/20 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                             <i class="fab fa-tiktok"></i> Follow
                         </a>
-                                      <!-- Telegram Channel -->
-                     <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform">
-                        <!-- Changed text-white to text-blue-500 -->
-                        <div class="text-4xl sm:text-5xl text-blue-500 group-hover:scale-110 transition-transform">
-                            <i class="fab fa-telegram"></i>
+                    </div>
+                    
+                    <!-- Telegram Channel Card (Now properly separated) -->
+                    <div class="app-card p-6 sm:p-7 text-center space-y-3 group hover:-translate-y-1 transition-transform flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl sm:text-5xl text-blue-500 group-hover:scale-110 transition-transform mb-3">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <h3 class="app-header-title text-lg font-bold text-white mb-1">Telegram</h3>
+                            <div class="text-mcGold font-semibold mb-2">@sokb_07</div>
+                            <p class="text-gray-300 text-xs mb-4">New Updates, Premium Accounts, Capes & Packs.</p>
                         </div>
-                        <h4 class="app-header-title text-lg font-bold text-white">Telegram Channel</h4>
-                        <div class="text-mcGold font-semibold">@sokb_07</div>
-                        <p class="text-gray-300 text-xs">New Update, Account Premium, Cape, Packs</p>
-                        
-                        <!-- Changed bg-black to bg-blue-500 (Telegram Blue) -->
-                        <a href="https://t.me/sokb_07" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg mt-2 bg-blue-500 hover:bg-blue-400 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                        <a href="https://t.me/sokb_07" target="_blank" rel="noopener noreferrer" onclick="playSfx('click')" class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg w-full bg-blue-500 hover:bg-blue-400 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                             <i class="fab fa-telegram"></i> Join Now
                         </a>
                     </div>
-                
+
                 </div>
             </section>
-
         </main>
 
                        <footer class="mt-auto border-t border-white/10 bg-black/80 py-8 px-4 text-center space-y-3">
