@@ -393,52 +393,67 @@
 </head>
 <body class="theme-modern min-h-screen flex flex-col antialiased" style="background-color: #0b0f19; color: #f3f4f6;">
 
-    <!-- ================= TOP THEME CONTROL HUD BANNER ================= -->
+      <!-- ================= TOP NAVIGATION & SEARCH ================= -->
     <header class="bg-black/95 border-b border-gray-800 sticky top-0 z-50 px-4 py-3 shadow-2xl backdrop-blur-md">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             
-            <div class="flex items-center gap-3 w-full md:w-auto justify-between">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <h1 class="font-bold text-white text-sm sm:text-base tracking-wide flex items-center gap-2">
-                        <i class="fas fa-layer-group text-mcGold"></i> KBEZ MC SHOP
-                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono hidden sm:inline-block"></span>
+            <!-- 1. LOGO (Left) -->
+            <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+                <a href="#" class="flex items-center gap-3" onclick="switchTab('all')">
+                    <!-- Logo Image with Gold Border -->
+                    <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-mcGold shrink-0 flex items-center justify-center bg-gray-900">
+                        <img src="image.jpg" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/111827/ffaa00?text=Logo'">
+                    </div>
+                    <h1 class="font-bold text-white text-lg tracking-wide hidden sm:block">
+                        KBEZ MC SHOP
                     </h1>
-                </div>
+                </a>
 
-                <div class="flex md:hidden items-center gap-2">
-                    <button onclick="toggleMobileView()" id="mobileViewBtnM" class="p-2 bg-gray-800 rounded text-xs text-gray-300 hover:text-white" title="Toggle Mobile Frame View">
-                        <i class="fas fa-mobile-alt"></i>
-                    </button>
-                    <button onclick="openCodeModal()" class="p-2 bg-gray-800 rounded text-xs text-mcGold" title="Inspect Theme Code">
-                        <i class="fas fa-code"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Theme Switcher Tabs -->
-           <div class="hidden md:flex items-center gap-1 sm:gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
-                <button onclick="setTheme('modern')" id="tab-modern" class="theme-switcher-tab px-3 py-1.5 rounded-lg font-sans text-xs font-semibold bg-gray-800 text-gray-300 hover:text-white flex items-center gap-1.5 shrink-0">
-                    <i class="fas fa-sparkles"></i> 1. Modern Dark <span class="theme-current-label ml-1 px-1.5 py-0.5 rounded bg-black/25 text-[9px] tracking-wide">ACTIVE</span>
-                </button>
-                <button onclick="setTheme('pixel')" id="tab-pixel" class="theme-switcher-tab px-3 py-1.5 rounded-lg font-sans text-xs font-semibold bg-gray-800 text-gray-300 hover:text-white flex items-center gap-1.5 shrink-0">
-                    <i class="fas fa-cubes"></i> 2. Minecraft Pixel <span class="theme-current-label ml-1 px-1.5 py-0.5 rounded bg-black/25 text-[9px] tracking-wide">ACTIVE</span>
-                </button>
-                <button onclick="setTheme('cyber')" id="tab-cyber" class="theme-switcher-tab px-3 py-1.5 rounded-lg font-sans text-xs font-semibold bg-gray-800 text-gray-300 hover:text-white flex items-center gap-1.5 shrink-0">
-                    <i class="fas fa-bolt text-cyan-400"></i> 3. Cyber Neon <span class="theme-current-label ml-1 px-1.5 py-0.5 rounded bg-black/25 text-[9px] tracking-wide">ACTIVE</span>
-                </button>
-                <button onclick="setTheme('luxury')" id="tab-luxury" class="theme-switcher-tab px-3 py-1.5 rounded-lg font-sans text-xs font-semibold bg-gray-800 text-gray-300 hover:text-white flex items-center gap-1.5 shrink-0">
-                    <i class="fas fa-crown"></i> 4. Clean Luxury <span class="theme-current-label ml-1 px-1.5 py-0.5 rounded bg-black/25 text-[9px] tracking-wide">ACTIVE</span>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 bg-gray-800 rounded text-gray-300 hover:text-white">
+                    <i class="fas fa-bars text-lg"></i>
                 </button>
             </div>
 
-            <div class="hidden md:flex items-center gap-3">
-                <button onclick="toggleMobileView()" id="mobileViewBtnD" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs font-sans text-gray-300 flex items-center gap-2 transition">
-                    <i class="fas fa-mobile-alt"></i> <span id="viewModeText">Mobile Frame</span>
+            <!-- 2. SEARCH BAR (Center) -->
+            <div class="relative w-full md:w-96 order-3 md:order-none">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </span>
+                <input type="text" id="globalSearch" oninput="handleSearch(this.value)" placeholder="Search accounts, capes, resource packs..." class="w-full pl-11 pr-4 py-2.5 bg-gray-900/80 border border-white/10 rounded-xl text-sm text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 font-sans transition shadow-inner">
+            </div>
+
+            <!-- 3. NAVIGATION LINKS & CONTROLS (Right) -->
+            <div class="flex items-center gap-2 lg:gap-4 order-2 md:order-none w-full md:w-auto justify-end">
+                
+                <div id="navLinksContainer" class="hidden md:flex items-center gap-1 font-sans text-xs font-semibold">
+                    <button onclick="switchTab('all')" data-tab="all" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">All</button>
+                    <button onclick="switchTab('accounts')" data-tab="accounts" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Accounts</button>
+                    <button onclick="switchTab('capes')" data-tab="capes" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Capes</button>
+                    <button onclick="switchTab('misc')" data-tab="misc" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Misc</button>
+                    <button onclick="switchTab('media')" data-tab="media" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Media</button>
+                    <button onclick="switchTab('contact')" data-tab="contact" class="nav-btn px-3 py-2 rounded-lg transition text-gray-300 hover:text-white">Support & FAQ</button>
+                </div>
+
+                <!-- Cart Button -->
+                <button onclick="toggleCart()" class="px-3 md:px-4 py-2 bg-mcGold hover:bg-yellow-500 text-black font-bold rounded-xl text-xs flex items-center gap-2 transition shadow-lg shadow-yellow-500/10 ml-2">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="hidden sm:inline">CART</span>
+                    <span id="desktopCartCount" class="bg-black text-mcGold px-2 py-0.5 rounded text-[11px]">0</span>
                 </button>
             </div>
         </div>
-    </header>
+
+        <!-- MOBILE DROPDOWN MENU -->
+        <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-2 pt-4 pb-2 border-t border-white/10 mt-3 font-sans text-xs font-semibold">
+            <button onclick="switchTab('all'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">▦ All</button>
+            <button onclick="switchTab('accounts'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🗡️ Accounts</button>
+            <button onclick="switchTab('capes'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">🚩 Capes</button>
+            <button onclick="switchTab('misc'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📦 Packs</button>
+            <button onclick="switchTab('media'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">📱 Media</button>
+            <button onclick="switchTab('contact'); toggleMobileMenu();" class="text-left px-4 py-2 rounded text-mcGold hover:bg-white/10">💬 Support & FAQ</button>
+        </div>
+    </header>    
 
     <!-- ================= PROPER NAV BAR (FIXED STRUCTURE) ================= -->
     <nav class="bg-black/90 border-b border-gray-800 sticky top-[57px] z-40 px-4 py-3 shadow-lg backdrop-blur-md">
